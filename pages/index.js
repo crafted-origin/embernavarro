@@ -1,15 +1,26 @@
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import Layout from '@/components/shared/layouts/layout';
+import { getDataForIndex } from '@/lib/api';
 
-export default function Index() {
+function IndexPage(props) {
+  const { preview, data, error } = props;
+  console.log({ data }, { error });
+
   return (
-    <Container maxWidth="sm">
-      <Box my={4}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Next.js example
-        </Typography>
-      </Box>
-    </Container>
+    <>
+      <Layout preview={preview}>
+        <div>Home page</div>
+      </Layout>
+    </>
   );
 }
+
+export async function getStaticProps({ preview = false }) {
+  console.log(preview);
+  const { data, error } = await getDataForIndex(preview);
+
+  return {
+    props: { preview, data, error },
+  };
+}
+
+export default IndexPage;
