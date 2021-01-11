@@ -1,6 +1,7 @@
 import Layout from '@/components/shared/layouts/layout';
 import { getDataForIndex } from '@/lib/api';
 import IntroductionSection from '@/components/pages/home/introduction-section';
+import ProjectSection from '@/components/pages/home/project-section';
 
 function IndexPage(props) {
   const { preview, data, error } = props;
@@ -30,6 +31,9 @@ function IndexPage(props) {
         ></div>
         {data?.introduction?.json && (
           <IntroductionSection data={data?.introduction?.json} />
+        )}
+        {data?.projectsCollection && (
+          <ProjectSection data={data?.projectsCollection?.items} />
         )}
       </Layout>
     </>
