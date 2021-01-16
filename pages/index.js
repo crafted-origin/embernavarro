@@ -5,6 +5,11 @@ import ProjectSection from '@/components/pages/home/project-section';
 
 function IndexPage(props) {
   const { preview, data, error } = props;
+  console.log(data);
+
+  const projectSectionData = data?.sectionsCollection?.items.find(
+    section => section?.sectionType?.__typename === 'SectionProject'
+  );
 
   if (error) {
     return (
@@ -32,15 +37,13 @@ function IndexPage(props) {
         {data?.introduction?.json && (
           <IntroductionSection data={data?.introduction?.json} />
         )}
-        {data?.projectsCollection && (
-          <ProjectSection data={data?.projectsCollection?.items} />
-        )}
+        {projectSectionData && <ProjectSection data={projectSectionData} />}
       </Layout>
     </>
   );
 }
 
-export async function getStaticProps({ preview = false }) {
+export async function getStaticProps({ preview = true }) {
   const { data, error } = await getDataForIndex(preview);
 
   return {
