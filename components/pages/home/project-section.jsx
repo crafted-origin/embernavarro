@@ -90,6 +90,12 @@ export default function ProjectSection(props) {
                 imageHeight = height || 250;
               }
 
+              let sizes;
+              if (layout === 'fill' || layout === 'responsive') {
+                sizes =
+                  '(min-width: 767px) 33vw, (min-width: 568px) 50vw, 100vw';
+              }
+
               return (
                 <GridListTile
                   key={image.sys.id}
@@ -105,6 +111,7 @@ export default function ProjectSection(props) {
                     objectFit={objectFit || 'cover'}
                     objectPosition={objectPosition || 'center center'}
                     quality={quality || 45}
+                    // sizes={sizes}
                   />
                 </GridListTile>
               );

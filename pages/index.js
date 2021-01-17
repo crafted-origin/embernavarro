@@ -5,7 +5,7 @@ import ProjectSection from '@/components/pages/home/project-section';
 
 function IndexPage(props) {
   const { preview, data, error } = props;
-  console.log(data);
+  // console.log(data);
 
   const projectSectionData = data?.sectionsCollection?.items.find(
     section => section?.sectionType?.__typename === 'SectionProject'
