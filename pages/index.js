@@ -43,7 +43,7 @@ function IndexPage(props) {
   );
 }
 
-export async function getStaticProps({ preview = true }) {
+export async function getStaticProps({ preview = false }) {
   const { data, error } = await getDataForIndex(preview);
 
   return {
