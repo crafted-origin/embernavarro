@@ -1,9 +1,15 @@
 import Layout from '@/components/shared/layouts/layout';
 import { getDataForIndex } from '@/lib/api';
 import IntroductionSection from '@/components/pages/home/introduction-section';
+import ProjectSection from '@/components/pages/home/project-section';
 
 function IndexPage(props) {
   const { preview, data, error } = props;
+  // console.log(data);
+
+  const projectSectionData = data?.sectionsCollection?.items.find(
+    section => section?.sectionType?.__typename === 'SectionProject'
+  );
 
   if (error) {
     return (
@@ -31,6 +37,7 @@ function IndexPage(props) {
         {data?.introduction?.json && (
           <IntroductionSection data={data?.introduction?.json} />
         )}
+        {projectSectionData && <ProjectSection data={projectSectionData} />}
       </Layout>
     </>
   );
