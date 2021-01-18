@@ -62,7 +62,7 @@ export default function ProjectSection(props) {
             spacing={16}
             cellHeight={200}
             className={null}
-            style={{ height: '600px' }}
+            // style={{ height: '600px' }}
             cols={4}
           >
             {tileData.map(tile => {
