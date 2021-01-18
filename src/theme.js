@@ -3,6 +3,13 @@ import { red } from '@material-ui/core/colors';
 
 // Create a theme instance.
 const theme = createMuiTheme({
+  particles: {
+    position: 'fixed',
+    width: '100%',
+    margin: '0',
+    padding: '0',
+    zIndex: '-1',
+  },
   palette: {
     primary: {
       main: '#556cd6',
