@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Particles from 'react-tsparticles';
-import ResizeObserver, { ResizeObserverProps } from 'rc-resize-observer';
+import ResizeObserver from 'rc-resize-observer';
 
 import particlesOptions from '../src/particles.json';
 import Layout from '@/components/shared/layouts/layout';
