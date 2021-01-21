@@ -6,8 +6,8 @@ import particlesOptions from '../src/particles.json';
 import Layout from '@/components/shared/layouts/layout';
 import { getDataForIndex } from '@/lib/api';
 import IntroductionSection from '@/components/pages/home/introduction-section';
-import ProjectSection from '@/components/pages/home/project-section';
-import { Box, makeStyles } from '@material-ui/core';
+import ProjectSectionMasonry from '@/components/pages/home/project-section-masonry';
+import { makeStyles } from '@material-ui/core';
 import { useRef } from 'react';
 
 const useStyles = makeStyles(theme => ({
@@ -71,7 +71,9 @@ function IndexPage(props) {
             )}
             <div style={{ height: '500px' }}></div>
 
-            {projectSectionData && <ProjectSection data={projectSectionData} />}
+            {projectSectionData && (
+              <ProjectSectionMasonry data={projectSectionData} />
+            )}
           </div>
         </ResizeObserver>
 
