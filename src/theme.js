@@ -10,6 +10,13 @@ const theme = createMuiTheme({
     padding: '0',
     zIndex: '-1',
   },
+  breakpoints: {
+    values: {
+      mobile: 412,
+      tablet: 846,
+      desktop: 1272,
+    },
+  },
   palette: {
     primary: {
       main: '#556cd6',
