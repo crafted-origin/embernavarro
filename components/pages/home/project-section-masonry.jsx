@@ -128,6 +128,9 @@ export default function ProjectSection(props) {
                     height={calcDimensions().xBlockHeight}
                     position="relative"
                     m={1}
+                    // Required to show border-radius
+                    overflow="hidden"
+                    borderRadius={10}
                   >
                     <Image
                       src={image.url}
