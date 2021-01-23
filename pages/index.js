@@ -28,9 +28,14 @@ function IndexPage(props) {
 
   // console.log(data);
 
-  const projectSectionData = data?.sectionsCollection?.items.find(
-    section => section?.sectionType?.__typename === 'SectionProject'
-  );
+  const getSectionData = name => {
+    return data?.sectionsCollection?.items.find(
+      section => section?.sectionType?.__typename === name
+    );
+  };
+
+  const introductionSectionData = getSectionData('SectionIntroduction');
+  const projectSectionData = getSectionData('SectionProject');
 
   const onResize = resizeObserverProps => {
     setFirstWrapperHeight(resizeObserverProps.height);
@@ -66,13 +71,13 @@ function IndexPage(props) {
 
         <ResizeObserver onResize={onResize}>
           <div ref={firstWrapperRef}>
-            {data?.introduction?.json && (
-              <IntroductionSection data={data?.introduction?.json} />
+            {introductionSectionData && (
+              <IntroductionSection data={introductionSectionData} />
             )}
             <div style={{ height: '500px' }}></div>
 
             {projectSectionData && (
-              <ProjectSectionMasonry data={projectSectionData} />
+              <ProjectSectionMasonry data={getSectionData('SectionProject')} />
             )}
           </div>
         </ResizeObserver>

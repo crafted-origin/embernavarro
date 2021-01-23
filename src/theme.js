@@ -10,11 +10,19 @@ const theme = createMuiTheme({
     padding: '0',
     zIndex: '-1',
   },
+  typography: {
+    h1: {
+      fontFamily: "'Josefin Sans', sans-serif",
+    },
+    h2: {
+      fontFamily: "'Josefin Sans', sans-serif",
+    },
+  },
   breakpoints: {
     values: {
-      mobile: 412,
-      tablet: 846,
-      desktop: 1272,
+      mobile: 452,
+      tablet: 886,
+      desktop: 1312,
     },
   },
   palette: {
