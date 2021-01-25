@@ -74,7 +74,6 @@ function IndexPage(props) {
             {introductionSectionData && (
               <IntroductionSection data={introductionSectionData} />
             )}
-            <div style={{ height: '500px' }}></div>
 
             {projectSectionData && (
               <ProjectSectionMasonry data={getSectionData('SectionProject')} />
