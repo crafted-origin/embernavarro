@@ -1,13 +1,19 @@
-import { Box } from '@material-ui/core';
+import { Box, useTheme } from '@material-ui/core';
 
 export default function SectionLayout(props) {
-  const { children } = props;
+  const { mb, children } = props;
+  const theme = useTheme();
 
   return (
     <Box
-      maxWidth={{ mobile: 412, tablet: 846, desktop: 1272 }}
+      className="section-layout"
+      maxWidth={{
+        xs: theme.breakpoints.values.xs,
+        sm: theme.breakpoints.values.sm,
+        lg: theme.breakpoints.values.lg,
+      }}
       mx="auto"
-      pb={4}
+      mb={mb}
       px={2.5}
     >
       {children}

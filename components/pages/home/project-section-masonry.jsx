@@ -15,9 +15,9 @@ const deviceRowHeight = {
 export default function ProjectSection(props) {
   const { data } = props;
   const theme = useTheme();
-  const matchesMobile = useMediaQuery(theme.breakpoints.up('mobile'));
-  const matchesTablet = useMediaQuery(theme.breakpoints.up('tablet'));
-  const matchesDesktop = useMediaQuery(theme.breakpoints.up('desktop'));
+  const matchesMobile = useMediaQuery(theme.breakpoints.up('xs'));
+  const matchesTablet = useMediaQuery(theme.breakpoints.up('sm'));
+  const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'));
   const [initialTileData, setInitialTileData] = useState([]);
   const [tileData, setTileData] = useState([]);
   const [types, setTypes] = useState([]);
