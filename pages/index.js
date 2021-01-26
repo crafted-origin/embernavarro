@@ -63,7 +63,7 @@ function IndexPage(props) {
         {/* Imitate tsParticles for now */}
         <div
           style={{
-            backgroundColor: 'lightblue',
+            backgroundColor: '#424242',
             height: firstWrapperHeight,
           }}
           className={classes.mainTsParticles}

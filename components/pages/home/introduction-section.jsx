@@ -13,7 +13,32 @@ import Image from 'next/image';
 import SectionLayout from '@/components/shared/layouts/section-layout';
 
 const useStyles = makeStyles(theme => ({
-  container: {},
+  description: {
+    ...theme.description,
+  },
+  subtitle: {
+    ...theme.subtitle,
+    // Need a deep merge since theme already contains the same key.
+    [theme.breakpoints.up('lg')]: {
+      ...theme.subtitle[theme.breakpoints.up('lg')],
+      marginBottom: '30px',
+    },
+    [theme.breakpoints.up('sm')]: {
+      ...theme.subtitle[theme.breakpoints.up('sm')],
+      marginBottom: '20px',
+    },
+  },
+  gridItemLogo: {
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: '10px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      paddingBottom: '10px',
+    },
+  },
+  gridItemDescription: {
+    textAlign: 'center',
+  },
 }));
 
 export default function IntroductionSection(props) {
@@ -21,8 +46,8 @@ export default function IntroductionSection(props) {
   const classes = useStyles(props);
   const logoImagesCollection = data.sectionType?.logoImagesCollection;
   const theme = useTheme();
-  const matchesTablet = useMediaQuery(theme.breakpoints.up('tablet'));
-  const matchesDesktop = useMediaQuery(theme.breakpoints.up('desktop'));
+  const matchesTablet = useMediaQuery(theme.breakpoints.up('sm'));
+  const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   const RICHTEXT_OPTIONS = {
     renderNode: {
@@ -31,21 +56,14 @@ export default function IntroductionSection(props) {
       },
       [BLOCKS.HEADING_2]: (node, children) => {
         return (
-          <Typography
-            variant="h2"
-            style={{
-              color: theme.colors.white[400],
-              fontSize: '30px',
-              marginBottom: '42px',
-            }}
-          >
+          <Typography className={classes.subtitle} variant="h2">
             {children}
           </Typography>
         );
       },
       [BLOCKS.PARAGRAPH]: (node, children) => {
         return (
-          <Typography variant="body1" style={{ color: '#FFFFFF' }}>
+          <Typography className={classes.description} variant="body1">
             {children}
           </Typography>
         );
@@ -72,7 +90,7 @@ export default function IntroductionSection(props) {
     }
 
     return (
-      <Box width={image.width} mb={'10px'}>
+      <Box width={image.width}>
         <Image
           src={image.image.url}
           alt={image.image.description}
@@ -90,7 +108,7 @@ export default function IntroductionSection(props) {
   const description = data?.sectionType.description;
 
   return (
-    <SectionLayout mb={{ desktop: '100px', tablet: '50px', mobile: '50px' }}>
+    <SectionLayout mb={{ lg: '100px', sm: '50px', xs: '50px' }}>
       <Grid
         className={classes.container}
         container
@@ -98,22 +116,10 @@ export default function IntroductionSection(props) {
         justify="center"
         alignItems="center"
       >
-        <Grid
-          item
-          desktop={8}
-          tablet={6}
-          mobile={12}
-          style={{ paddingBottom: '10px' }}
-        >
+        <Grid className={classes.gridItemLogo} item xs>
           {renderLogoImage()}
         </Grid>
-        <Grid
-          item
-          desktop={8}
-          tablet={6}
-          mobile={12}
-          style={{ paddingBottom: '10px' }}
-        >
+        <Grid className={classes.gridItemDescription} item xs>
           {documentToReactComponents(description.json, RICHTEXT_OPTIONS)}
         </Grid>
       </Grid>

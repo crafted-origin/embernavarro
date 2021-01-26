@@ -5,13 +5,14 @@ import { red } from '@material-ui/core/colors';
 import colors from './colors';
 
 const BREAKPOINTS = {
-  mobile: 406,
-  tablet: 886,
-  desktop: 1312,
+  xs: 376,
+  sm: 812,
+  lg: 1232,
 };
 
 const defaultTheme = createMuiTheme({
   breakpoints: {
+    keys: ['xs', 'sm', 'lg'],
     values: BREAKPOINTS,
   },
   typography: {
@@ -35,10 +36,10 @@ const theme = createMuiTheme({
       fontSize: `${12 / defaultTheme.typography.fontSize}rem`,
       color: colors.grey[400],
       fontWeight: 300,
-      [defaultTheme.breakpoints.up('tablet')]: {
+      [defaultTheme.breakpoints.up('sm')]: {
         fontSize: `${14 / defaultTheme.typography.fontSize}rem`,
       },
-      [defaultTheme.breakpoints.up('desktop')]: {
+      [defaultTheme.breakpoints.up('lg')]: {
         fontSize: `${16 / defaultTheme.typography.fontSize}rem`,
       },
     },
@@ -49,7 +50,24 @@ const theme = createMuiTheme({
       fontFamily: "'Josefin Sans', sans-serif",
     },
   },
-
+  subtitle: {
+    color: colors.white[400],
+    [defaultTheme.breakpoints.up('sm')]: {
+      fontSize: `${20 / defaultTheme.typography.fontSize}rem`,
+    },
+    [defaultTheme.breakpoints.up('lg')]: {
+      fontSize: `${30 / defaultTheme.typography.fontSize}rem`,
+    },
+  },
+  description: {
+    color: colors.white[400],
+    [defaultTheme.breakpoints.up('sm')]: {
+      width: `${647 / defaultTheme.typography.fontSize}rem`,
+    },
+    [defaultTheme.breakpoints.up('lg')]: {
+      width: `${850 / defaultTheme.typography.fontSize}rem`,
+    },
+  },
   palette: {
     primary: {
       main: '#556cd6',
@@ -66,5 +84,6 @@ const theme = createMuiTheme({
   },
   colors,
 });
+console.log(theme);
 
 export default theme;

@@ -8,13 +8,12 @@ export default function SectionLayout(props) {
     <Box
       className="section-layout"
       maxWidth={{
-        mobile: theme.breakpoints.values.mobile,
-        tablet: theme.breakpoints.values.tablet,
-        desktop: theme.breakpoints.values.desktop,
+        xs: theme.breakpoints.values.xs,
+        sm: theme.breakpoints.values.sm,
+        lg: theme.breakpoints.values.lg,
       }}
       mx="auto"
       mb={mb}
-      pb={4}
       px={2.5}
     >
       {children}
