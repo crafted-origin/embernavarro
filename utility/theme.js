@@ -47,11 +47,13 @@ const theme = createMuiTheme({
       fontFamily: "'Josefin Sans', sans-serif",
     },
     h2: {
-      fontFamily: "'Josefin Sans', sans-serif",
+      fontFamily: "'Jost', sans-serif",
     },
   },
   subtitle: {
     color: colors.white[400],
+    fontFamily: "'Josefin Sans', sans-serif",
+    fontSize: `${18 / defaultTheme.typography.fontSize}rem`,
     [defaultTheme.breakpoints.up('sm')]: {
       fontSize: `${20 / defaultTheme.typography.fontSize}rem`,
     },

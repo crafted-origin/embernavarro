@@ -18,23 +18,19 @@ const useStyles = makeStyles(theme => ({
   },
   subtitle: {
     ...theme.subtitle,
+    marginBottom: '20px',
+    [theme.breakpoints.up('sm')]: {
+      ...theme.subtitle[theme.breakpoints.up('sm')],
+      marginBottom: '20px',
+    },
     // Need a deep merge since theme already contains the same key.
     [theme.breakpoints.up('lg')]: {
       ...theme.subtitle[theme.breakpoints.up('lg')],
       marginBottom: '30px',
     },
-    [theme.breakpoints.up('sm')]: {
-      ...theme.subtitle[theme.breakpoints.up('sm')],
-      marginBottom: '20px',
-    },
   },
   gridItemLogo: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: '10px',
-    },
-    [theme.breakpoints.up('lg')]: {
-      paddingBottom: '10px',
-    },
+    paddingBottom: '10px',
   },
   gridItemDescription: {
     textAlign: 'center',
@@ -46,6 +42,7 @@ export default function IntroductionSection(props) {
   const classes = useStyles(props);
   const logoImagesCollection = data.sectionType?.logoImagesCollection;
   const theme = useTheme();
+  const matchesMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const matchesTablet = useMediaQuery(theme.breakpoints.up('sm'));
   const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
@@ -69,7 +66,13 @@ export default function IntroductionSection(props) {
         );
       },
     },
+    renderText: text =>
+      text.split('\n').flatMap((text, i) => [i > 0 && <br />, text]),
   };
+
+  const description = matchesMobile
+    ? data?.sectionType?.descriptionMobile
+    : data?.sectionType?.description;
 
   const renderLogoImage = () => {
     let device = 'Desktop';
@@ -105,8 +108,6 @@ export default function IntroductionSection(props) {
     );
   };
 
-  const description = data?.sectionType.description;
-
   return (
     <SectionLayout mb={{ lg: '100px', sm: '50px', xs: '50px' }}>
       <Grid
@@ -120,7 +121,7 @@ export default function IntroductionSection(props) {
           {renderLogoImage()}
         </Grid>
         <Grid className={classes.gridItemDescription} item xs>
-          {documentToReactComponents(description.json, RICHTEXT_OPTIONS)}
+          {documentToReactComponents(description?.json, RICHTEXT_OPTIONS)}
         </Grid>
       </Grid>
     </SectionLayout>
