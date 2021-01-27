@@ -67,7 +67,7 @@ export default function IntroductionSection(props) {
       },
     },
     renderText: text =>
-      text.split('\n').flatMap((text, i) => [i > 0 && <br />, text]),
+      text.split('\n').flatMap((text, i) => [i > 0 && <br key={i} />, text]),
   };
 
   const description = matchesMobile

@@ -5,6 +5,9 @@ const colors = {
   grey: {
     400: '#525252',
   },
+  blue: {
+    300: '#00EEFF',
+  },
 };
 
 export default colors;

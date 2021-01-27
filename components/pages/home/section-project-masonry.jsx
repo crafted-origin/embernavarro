@@ -2,9 +2,16 @@ import { useState, useEffect } from 'react';
 import SimpleReactLightbox, { SRLWrapper } from 'simple-react-lightbox';
 import { XMasonry, XBlock } from 'react-xmasonry';
 import Image from 'next/image';
-import { Box, useMediaQuery, useTheme } from '@material-ui/core';
+import {
+  Box,
+  Link,
+  makeStyles,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core';
 
 import SectionLayout from '@/components/shared/layouts/section-layout';
+import LinkButton from '@/components/shared/ui-elements/link-button';
 
 const deviceRowHeight = {
   desktop: [88, 192, 296, 400],
@@ -12,15 +19,15 @@ const deviceRowHeight = {
   mobile: [88, 184],
 };
 
-export default function ProjectSection(props) {
+export default function SectionProjectMasonry(props) {
   const { data } = props;
   const theme = useTheme();
-  const matchesMobile = useMediaQuery(theme.breakpoints.up('xs'));
   const matchesTablet = useMediaQuery(theme.breakpoints.up('sm'));
   const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'));
   const [initialTileData, setInitialTileData] = useState([]);
   const [tileData, setTileData] = useState([]);
   const [types, setTypes] = useState([]);
+  const [selectedType, setSelectedType] = useState('All');
 
   useEffect(() => {
     const gridListTypesCollectionItems =
@@ -55,18 +62,30 @@ export default function ProjectSection(props) {
       );
       setTileData(projectTileData);
     }
+
+    setSelectedType(type);
   };
 
   const projectFilters = types.map((type, index) => (
-    <button key={index} onClick={() => onFilterClick(type)}>
+    <LinkButton
+      key={index}
+      variant="h4"
+      color="textSecondary"
+      active={type === selectedType}
+      onLinkButtonClick={() => {
+        onFilterClick(type);
+      }}
+    >
       {type}
-    </button>
+    </LinkButton>
   ));
 
   return (
     <SimpleReactLightbox>
       <SectionLayout>
-        {projectFilters}
+        <Box display="flex" justifyContent="center" marginBottom="20px">
+          {projectFilters}
+        </Box>
         <SRLWrapper>
           <XMasonry maxColumns={12} targetBlockWidth={102}>
             {tileData.map(tile => {

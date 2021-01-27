@@ -43,11 +43,17 @@ const theme = createMuiTheme({
         fontSize: `${16 / defaultTheme.typography.fontSize}rem`,
       },
     },
+    fontFamily: "'Jost', 'Arial', sans-serif",
     h1: {
       fontFamily: "'Josefin Sans', sans-serif",
     },
     h2: {
       fontFamily: "'Jost', sans-serif",
+    },
+    h4: {
+      fontFamily: "'Jost', 'Arial', sans-serif",
+      fontSize: `${14 / defaultTheme.typography.fontSize}rem`,
+      fontWeight: 300,
     },
   },
   subtitle: {
@@ -73,6 +79,14 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: '#556cd6',
+    },
+    text: {
+      primary: colors.grey[400],
+      secondary: colors.white[400],
+    },
+    action: {
+      hover: colors.blue[300],
+      active: colors.blue[300],
     },
     secondary: {
       main: '#19857b',
