@@ -12,6 +12,7 @@ import {
 
 import SectionLayout from '@/components/shared/layouts/section-layout';
 import LinkButton from '@/components/shared/ui-elements/link-button';
+import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 
 const deviceRowHeight = {
   desktop: [88, 192, 296, 400],
@@ -83,6 +84,9 @@ export default function SectionProjectMasonry(props) {
   return (
     <SimpleReactLightbox>
       <SectionLayout>
+        <Box mb={'10px'}>
+          <RichTextBlock data={data.description?.json} isSectionTitle />
+        </Box>
         <Box display="flex" justifyContent="center" marginBottom="20px">
           {projectFilters}
         </Box>

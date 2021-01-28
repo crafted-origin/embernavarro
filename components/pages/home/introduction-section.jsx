@@ -11,24 +11,9 @@ import { BLOCKS } from '@contentful/rich-text-types';
 import Image from 'next/image';
 
 import SectionLayout from '@/components/shared/layouts/section-layout';
+import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 
 const useStyles = makeStyles(theme => ({
-  description: {
-    ...theme.description,
-  },
-  subtitle: {
-    ...theme.subtitle,
-    marginBottom: '20px',
-    [theme.breakpoints.up('sm')]: {
-      ...theme.subtitle[theme.breakpoints.up('sm')],
-      marginBottom: '20px',
-    },
-    // Need a deep merge since theme already contains the same key.
-    [theme.breakpoints.up('lg')]: {
-      ...theme.subtitle[theme.breakpoints.up('lg')],
-      marginBottom: '30px',
-    },
-  },
   gridItemLogo: {
     paddingBottom: '10px',
   },
@@ -45,30 +30,6 @@ export default function IntroductionSection(props) {
   const matchesMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const matchesTablet = useMediaQuery(theme.breakpoints.up('sm'));
   const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'));
-
-  const RICHTEXT_OPTIONS = {
-    renderNode: {
-      [BLOCKS.HEADING_1]: (node, children) => {
-        return <Typography variant="h1">{children}</Typography>;
-      },
-      [BLOCKS.HEADING_2]: (node, children) => {
-        return (
-          <Typography className={classes.subtitle} variant="h2">
-            {children}
-          </Typography>
-        );
-      },
-      [BLOCKS.PARAGRAPH]: (node, children) => {
-        return (
-          <Typography className={classes.description} variant="body1">
-            {children}
-          </Typography>
-        );
-      },
-    },
-    renderText: text =>
-      text.split('\n').flatMap((text, i) => [i > 0 && <br key={i} />, text]),
-  };
 
   const description = matchesMobile
     ? data?.sectionType?.descriptionMobile
@@ -121,7 +82,7 @@ export default function IntroductionSection(props) {
           {renderLogoImage()}
         </Grid>
         <Grid className={classes.gridItemDescription} item xs>
-          {documentToReactComponents(description?.json, RICHTEXT_OPTIONS)}
+          <RichTextBlock data={description?.json} isSubtitle isDescription />
         </Grid>
       </Grid>
     </SectionLayout>

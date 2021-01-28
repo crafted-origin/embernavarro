@@ -1,5 +1,4 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import { red } from '@material-ui/core/colors';
 
 import colors from './colors';
@@ -10,6 +9,11 @@ const BREAKPOINTS = {
   lg: 1232,
 };
 
+/**
+ * The default theme variables used to refer in the custom theme below.
+ * ! Do not use any of these properties anywhere else other than the below theme.
+ * ? Are the breakpoints set correctly with the correct breakpoint generated functions?
+ */
 const defaultTheme = createMuiTheme({
   breakpoints: {
     keys: ['xs', 'sm', 'lg'],
@@ -17,6 +21,8 @@ const defaultTheme = createMuiTheme({
   },
   typography: {
     fontSize: 16,
+    htmlFontSize: 16,
+    fontFamily: "'Jost', 'Arial', sans-serif",
   },
 });
 
@@ -31,6 +37,8 @@ const theme = createMuiTheme({
     zIndex: '-1',
   },
   typography: {
+    // Deep merge from default theme and custom theme.
+    ...defaultTheme.typography,
     body1: {
       fontFamily: "'Jost', sans-serif",
       fontSize: `${12 / defaultTheme.typography.fontSize}rem`,
@@ -43,12 +51,30 @@ const theme = createMuiTheme({
         fontSize: `${16 / defaultTheme.typography.fontSize}rem`,
       },
     },
-    fontFamily: "'Jost', 'Arial', sans-serif",
     h1: {
       fontFamily: "'Josefin Sans', sans-serif",
     },
     h2: {
-      fontFamily: "'Jost', sans-serif",
+      fontFamily: defaultTheme.typography.fontFamily,
+      fontSize: `${24 / defaultTheme.typography.fontSize}rem`,
+      fontWeight: 700,
+      [defaultTheme.breakpoints.up('sm')]: {
+        fontSize: `${30 / defaultTheme.typography.fontSize}rem`,
+      },
+      [defaultTheme.breakpoints.up('lg')]: {
+        fontSize: `${40 / defaultTheme.typography.fontSize}rem`,
+      },
+    },
+    h3: {
+      fontFamily: "'Josefin Sans', sans-serif",
+      fontSize: `${18 / defaultTheme.typography.fontSize}rem`,
+      fontWeight: 100,
+      [defaultTheme.breakpoints.up('sm')]: {
+        fontSize: `${20 / defaultTheme.typography.fontSize}rem`,
+      },
+      [defaultTheme.breakpoints.up('lg')]: {
+        fontSize: `${30 / defaultTheme.typography.fontSize}rem`,
+      },
     },
     h4: {
       fontFamily: "'Jost', 'Arial', sans-serif",
@@ -70,7 +96,7 @@ const theme = createMuiTheme({
   description: {
     color: colors.white[400],
     [defaultTheme.breakpoints.up('sm')]: {
-      width: `${647 / defaultTheme.typography.fontSize}rem`,
+      width: `${674 / defaultTheme.typography.fontSize}rem`,
     },
     [defaultTheme.breakpoints.up('lg')]: {
       width: `${850 / defaultTheme.typography.fontSize}rem`,
