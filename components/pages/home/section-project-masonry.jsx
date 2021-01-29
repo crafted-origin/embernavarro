@@ -137,15 +137,6 @@ export default function SectionProjectMasonry(props) {
                 imageHeight = height || 250;
               }
 
-              let sizes;
-              // Fine tune sizes
-              if (layout === 'fill' || layout === 'responsive') {
-                // Todo - Finish sizing
-                sizes =
-                  '(min-width: 767px) 33vw, (min-width: 568px) 50vw, 100vw';
-                `(min-width: ${theme.breakpoints.values['xs']}) `;
-              }
-
               const calcDimensions = () => {
                 let xBlockWidth;
                 let xBlockHeight;
@@ -184,7 +175,6 @@ export default function SectionProjectMasonry(props) {
                       objectFit={objectFit || 'cover'}
                       objectPosition={objectPosition || 'center center'}
                       quality={quality || 45}
-                      sizes={sizes}
                     />
                   </Box>
                 </XBlock>
