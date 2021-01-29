@@ -3,20 +3,23 @@ import { red } from '@material-ui/core/colors';
 
 import colors from './colors';
 
+// * Must provide all keys with values if overriding.
+// ! Else some of the breakpoint functions won't work properly.
+// * https://material-ui.com/customization/breakpoints/#custom-breakpoints
 const BREAKPOINTS = {
-  xs: 376,
-  sm: 812,
-  lg: 1232,
+  xs: 412,
+  sm: 846,
+  md: 960,
+  lg: 1272,
+  xl: 1920,
 };
 
 /**
  * The default theme variables used to refer in the custom theme below.
  * ! Do not use any of these properties anywhere else other than the below theme.
- * ? Are the breakpoints set correctly with the correct breakpoint generated functions?
  */
 const defaultTheme = createMuiTheme({
   breakpoints: {
-    keys: ['xs', 'sm', 'lg'],
     values: BREAKPOINTS,
   },
   typography: {
@@ -26,7 +29,6 @@ const defaultTheme = createMuiTheme({
   },
 });
 
-// Create a theme instance.
 const theme = createMuiTheme({
   ...defaultTheme,
   particles: {

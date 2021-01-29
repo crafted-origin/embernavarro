@@ -2,33 +2,50 @@ import { useState, useEffect } from 'react';
 import SimpleReactLightbox, { SRLWrapper } from 'simple-react-lightbox';
 import { XMasonry, XBlock } from 'react-xmasonry';
 import Image from 'next/image';
-import {
-  Box,
-  Link,
-  makeStyles,
-  useMediaQuery,
-  useTheme,
-} from '@material-ui/core';
+import { Box, useMediaQuery, useTheme } from '@material-ui/core';
 
 import SectionLayout from '@/components/shared/layouts/section-layout';
 import LinkButton from '@/components/shared/ui-elements/link-button';
 import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 
+// Minimum column width per tile for each device.
+const deviceColumnWidth = {
+  desktop: 191,
+  tablet: 122,
+  mobile: 88,
+};
+
+// All possible tile heights for each device.
 const deviceRowHeight = {
-  desktop: [88, 192, 296, 400],
-  tablet: [88, 192, 296, 400],
-  mobile: [88, 184],
+  desktop: [192, 296, 400],
+  tablet: [122, 191, 260],
+  mobile: [56, 120, 184],
 };
 
 export default function SectionProjectMasonry(props) {
   const { data } = props;
   const theme = useTheme();
-  const matchesTablet = useMediaQuery(theme.breakpoints.up('sm'));
-  const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+  // ! Need to disable SSR to have proper matches on initial load.
+  // ! https://github.com/mui-org/material-ui/pull/23806/files
+  const matchesMobile = useMediaQuery(theme.breakpoints.down('xs'), {
+    noSsr: true,
+  });
+  const matchesTablet = useMediaQuery(theme.breakpoints.between('sm', 'lg'), {
+    noSsr: true,
+  });
+  const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
+    noSsr: true,
+  });
   const [initialTileData, setInitialTileData] = useState([]);
   const [tileData, setTileData] = useState([]);
   const [types, setTypes] = useState([]);
   const [selectedType, setSelectedType] = useState('All');
+  // * Desktop matches first then mobile to cover max and min.
+  const targetBlockWidth = matchesDesktop
+    ? deviceColumnWidth.desktop
+    : matchesMobile
+    ? deviceColumnWidth.mobile
+    : deviceColumnWidth.tablet;
 
   useEffect(() => {
     const gridListTypesCollectionItems =
@@ -91,7 +108,8 @@ export default function SectionProjectMasonry(props) {
           {projectFilters}
         </Box>
         <SRLWrapper>
-          <XMasonry maxColumns={12} targetBlockWidth={102}>
+          {/* Max columns for all device cases. */}
+          <XMasonry maxColumns={6} targetBlockWidth={targetBlockWidth}>
             {tileData.map(tile => {
               const {
                 tileImage: {
@@ -122,8 +140,10 @@ export default function SectionProjectMasonry(props) {
               let sizes;
               // Fine tune sizes
               if (layout === 'fill' || layout === 'responsive') {
+                // Todo - Finish sizing
                 sizes =
                   '(min-width: 767px) 33vw, (min-width: 568px) 50vw, 100vw';
+                `(min-width: ${theme.breakpoints.values['xs']}) `;
               }
 
               const calcDimensions = () => {
@@ -150,7 +170,7 @@ export default function SectionProjectMasonry(props) {
                     key={image.sys.id}
                     height={calcDimensions().xBlockHeight}
                     position="relative"
-                    m={1}
+                    m={{ xs: 0.5, sm: 1, lg: 1 }}
                     // Required to show border-radius
                     overflow="hidden"
                     borderRadius={10}
