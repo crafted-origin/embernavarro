@@ -10,9 +10,9 @@ import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 
 // Minimum column width per tile for each device.
 const deviceColumnWidth = {
-  desktop: 191,
-  tablet: 122,
-  mobile: 88,
+  desktop: [191, 296, 400, 504, 608],
+  tablet: [122, 191, 260, 397],
+  mobile: [88, 120, 248],
 };
 
 // All possible tile heights for each device.
@@ -42,10 +42,10 @@ export default function SectionProjectMasonry(props) {
   const [selectedType, setSelectedType] = useState('All');
   // * Desktop matches first then mobile to cover max and min.
   const targetBlockWidth = matchesDesktop
-    ? deviceColumnWidth.desktop
+    ? deviceColumnWidth.desktop[0]
     : matchesMobile
-    ? deviceColumnWidth.mobile
-    : deviceColumnWidth.tablet;
+    ? deviceColumnWidth.mobile[0]
+    : deviceColumnWidth.tablet[0];
 
   useEffect(() => {
     const gridListTypesCollectionItems =
@@ -129,13 +129,13 @@ export default function SectionProjectMasonry(props) {
                 mobileRows,
               } = tile;
 
-              let imageWidth;
-              let imageHeight;
-              // Image requires width and height only if layout is not fill
-              if (layout !== 'fill') {
-                imageWidth = width || 400;
-                imageHeight = height || 250;
-              }
+              let { imageWidth, imageHeight } = calcIntrinsicDimensions(
+                matchesDesktop,
+                matchesMobile,
+                layout,
+                width,
+                height
+              );
 
               const calcDimensions = () => {
                 let xBlockWidth;
@@ -185,4 +185,43 @@ export default function SectionProjectMasonry(props) {
       </SectionLayout>
     </SimpleReactLightbox>
   );
+}
+
+/**
+ * Returns the required default or defined width and height of an image if layout is not fill.
+ * @param {string} layout next/image layout options.
+ * @param {number} width Width of the image.
+ * @param {number} height Height of the image.
+ */
+function calcIntrinsicDimensions(
+  matchesDesktop,
+  matchesMobile,
+  layout,
+  width,
+  height
+) {
+  let imageWidth;
+  let imageHeight;
+  // Image requires width and height only if layout is not fill
+  if (layout !== 'fill') {
+    imageWidth = width;
+    imageHeight = height;
+
+    if (!imageWidth) {
+      imageWidth = matchesDesktop
+        ? deviceColumnWidth.desktop[1]
+        : matchesMobile
+        ? deviceColumnWidth.mobile[1]
+        : deviceColumnWidth.tablet[1];
+    }
+
+    if (!imageHeight) {
+      imageHeight = matchesDesktop
+        ? deviceRowHeight.desktop[1]
+        : matchesMobile
+        ? deviceRowHeight.mobile[1]
+        : deviceRowHeight.tablet[1];
+    }
+  }
+  return { imageWidth, imageHeight };
 }
