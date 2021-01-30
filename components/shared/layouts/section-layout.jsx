@@ -16,6 +16,7 @@ export default function SectionLayout(props) {
       mb={mb}
       pb={4}
       px={{ xs: '15px', sm: '17px', lg: '20px' }}
+      minHeight={props.minHeight}
     >
       {children}
     </Box>

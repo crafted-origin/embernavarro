@@ -3,40 +3,31 @@
   "interactivity": {
     "events": {
       "onClick": {
-        "enable": true,
-        "mode": "push"
-      },
-      "onDiv": {
-        "selectors": "#repulse-div",
         "mode": "repulse"
       },
       "onHover": {
-        "enable": true,
-        "mode": "bubble",
-        "parallax": {
-          "force": 60
-        }
+        "mode": "grab"
       }
     },
     "modes": {
       "bubble": {
         "distance": 400,
         "duration": 2,
-        "opacity": 0.8,
+        "opacity": 8,
         "size": 40
       },
       "grab": {
-        "distance": 400
+        "distance": 200
       }
     }
   },
   "particles": {
     "color": {
-      "value": "#ffffff"
+      "value": ["#5bc0eb", "#fde74c", "#9bc53d", "#e55934", "#fa7921"]
     },
     "links": {
       "color": {
-        "value": "#000"
+        "value": "#ffffff"
       },
       "distance": 150,
       "opacity": 0.4
@@ -49,230 +40,61 @@
         }
       },
       "enable": true,
+      "noise": {
+        "delay": {
+          "value": 0.1
+        },
+        "enable": true
+      },
       "outModes": {
-        "bottom": "out",
-        "left": "out",
-        "right": "out",
-        "top": "out"
+        "default": "destroy",
+        "bottom": "destroy",
+        "left": "destroy",
+        "right": "destroy",
+        "top": "destroy"
+      },
+      "speed": 4,
+      "trail": {
+        "enable": true,
+        "length": 20
       }
     },
     "number": {
-      "density": {
-        "enable": true
-      },
-      "value": 80
+      "value": 0
     },
     "opacity": {
-      "random": {
-        "enable": true
-      },
+      "value": 0.5,
       "animation": {
-        "enable": true,
-        "minimumValue": 0.2,
+        "minimumValue": 0.1,
         "speed": 1
       }
     },
-    "rotate": {
-      "random": {
-        "enable": true
-      },
-      "animation": {
-        "enable": true,
-        "speed": 5
-      },
-      "direction": "random"
-    },
     "shape": {
       "options": {
-        "character": {
-          "fill": false,
-          "font": "Verdana",
-          "style": "",
-          "value": "*",
-          "weight": "400"
-        },
-        "char": {
-          "fill": false,
-          "font": "Verdana",
-          "style": "",
-          "value": "*",
-          "weight": "400"
-        },
         "polygon": {
-          "sides": 5
+          "nb_sides": 5
         },
         "star": {
-          "sides": 5
+          "nb_sides": 5
         },
-        "image": [
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/apple.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/avocado.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/banana.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/berries.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/cherry.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/grapes.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/lemon.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/orange.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/peach.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/pear.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/pepper.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/plum.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/star.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/strawberry.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/watermelon.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/watermelon_slice.png",
-            "width": 32,
-            "height": 32
-          }
-        ],
-        "images": [
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/apple.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/avocado.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/banana.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/berries.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/cherry.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/grapes.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/lemon.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/orange.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/peach.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/pear.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/pepper.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/plum.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/star.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/strawberry.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/watermelon.png",
-            "width": 32,
-            "height": 32
-          },
-          {
-            "src": "https://cdn.matteobruni.it/images/particles/fruits/watermelon_slice.png",
-            "width": 32,
-            "height": 32
-          }
-        ]
-      },
-      "type": "image"
+        "image": {
+          "src": "https://cdn.matteobruni.it/images/particles/github.svg",
+          "width": 100,
+          "height": 100
+        },
+        "images": {
+          "src": "https://cdn.matteobruni.it/images/particles/github.svg",
+          "width": 100,
+          "height": 100
+        }
+      }
     },
     "size": {
-      "value": 16,
+      "random": {
+        "enable": true,
+        "minimumValue": 4
+      },
+      "value": 7,
       "animation": {
         "minimumValue": 0.1,
         "speed": 40
@@ -287,6 +109,24 @@
           "sync": true
         }
       }
+    }
+  },
+  "pauseOnBlur": false,
+  "emitters": {
+    "direction": "none",
+    "life": {},
+    "rate": {
+      "quantity": 1,
+      "delay": 0.1
+    },
+    "size": {
+      "mode": "precise",
+      "height": 50,
+      "width": 50
+    },
+    "position": {
+      "x": 50,
+      "y": 50
     }
   }
 }
