@@ -5,22 +5,47 @@ import Image from 'next/image';
 import { Box, useMediaQuery, useTheme } from '@material-ui/core';
 
 import SectionLayout from '@/components/shared/layouts/section-layout';
+import LinkButton from '@/components/shared/ui-elements/link-button';
+import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 
-const deviceRowHeight = {
-  desktop: [88, 192, 296, 400],
-  tablet: [88, 192, 296, 400],
-  mobile: [88, 184],
+// Minimum column width per tile for each device.
+const deviceColumnWidth = {
+  desktop: [191, 296, 400, 504, 608],
+  tablet: [122, 191, 260, 397],
+  mobile: [88, 120, 248],
 };
 
-export default function ProjectSection(props) {
+// All possible tile heights for each device.
+const deviceRowHeight = {
+  desktop: [192, 296, 400],
+  tablet: [122, 191, 260],
+  mobile: [56, 120, 184],
+};
+
+export default function SectionProjectMasonry(props) {
   const { data } = props;
   const theme = useTheme();
-  const matchesMobile = useMediaQuery(theme.breakpoints.up('xs'));
-  const matchesTablet = useMediaQuery(theme.breakpoints.up('sm'));
-  const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+  // ! Need to disable SSR to have proper matches on initial load.
+  // ! https://github.com/mui-org/material-ui/pull/23806/files
+  const matchesMobile = useMediaQuery(theme.breakpoints.down('xs'), {
+    noSsr: true,
+  });
+  const matchesTablet = useMediaQuery(theme.breakpoints.between('sm', 'lg'), {
+    noSsr: true,
+  });
+  const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
+    noSsr: true,
+  });
   const [initialTileData, setInitialTileData] = useState([]);
   const [tileData, setTileData] = useState([]);
   const [types, setTypes] = useState([]);
+  const [selectedType, setSelectedType] = useState('All');
+  // * Desktop matches first then mobile to cover max and min.
+  const targetBlockWidth = matchesDesktop
+    ? deviceColumnWidth.desktop[0]
+    : matchesMobile
+    ? deviceColumnWidth.mobile[0]
+    : deviceColumnWidth.tablet[0];
 
   useEffect(() => {
     const gridListTypesCollectionItems =
@@ -55,20 +80,36 @@ export default function ProjectSection(props) {
       );
       setTileData(projectTileData);
     }
+
+    setSelectedType(type);
   };
 
   const projectFilters = types.map((type, index) => (
-    <button key={index} onClick={() => onFilterClick(type)}>
+    <LinkButton
+      key={index}
+      variant="h4"
+      color="textSecondary"
+      active={type === selectedType}
+      onLinkButtonClick={() => {
+        onFilterClick(type);
+      }}
+    >
       {type}
-    </button>
+    </LinkButton>
   ));
 
   return (
     <SimpleReactLightbox>
       <SectionLayout>
-        {projectFilters}
+        <Box mb={'10px'}>
+          <RichTextBlock data={data.description?.json} isSectionTitle />
+        </Box>
+        <Box display="flex" justifyContent="center" marginBottom="20px">
+          {projectFilters}
+        </Box>
         <SRLWrapper>
-          <XMasonry maxColumns={12} targetBlockWidth={102}>
+          {/* Max columns for all device cases. */}
+          <XMasonry maxColumns={6} targetBlockWidth={targetBlockWidth}>
             {tileData.map(tile => {
               const {
                 tileImage: {
@@ -88,20 +129,13 @@ export default function ProjectSection(props) {
                 mobileRows,
               } = tile;
 
-              let imageWidth;
-              let imageHeight;
-              // Image requires width and height only if layout is not fill
-              if (layout !== 'fill') {
-                imageWidth = width || 400;
-                imageHeight = height || 250;
-              }
-
-              let sizes;
-              // Fine tune sizes
-              if (layout === 'fill' || layout === 'responsive') {
-                sizes =
-                  '(min-width: 767px) 33vw, (min-width: 568px) 50vw, 100vw';
-              }
+              let { imageWidth, imageHeight } = calcIntrinsicDimensions(
+                matchesDesktop,
+                matchesMobile,
+                layout,
+                width,
+                height
+              );
 
               const calcDimensions = () => {
                 let xBlockWidth;
@@ -127,7 +161,7 @@ export default function ProjectSection(props) {
                     key={image.sys.id}
                     height={calcDimensions().xBlockHeight}
                     position="relative"
-                    m={1}
+                    m={{ xs: 0.5, sm: 1, lg: 1 }}
                     // Required to show border-radius
                     overflow="hidden"
                     borderRadius={10}
@@ -141,7 +175,6 @@ export default function ProjectSection(props) {
                       objectFit={objectFit || 'cover'}
                       objectPosition={objectPosition || 'center center'}
                       quality={quality || 45}
-                      sizes={sizes}
                     />
                   </Box>
                 </XBlock>
@@ -152,4 +185,43 @@ export default function ProjectSection(props) {
       </SectionLayout>
     </SimpleReactLightbox>
   );
+}
+
+/**
+ * Returns the required default or defined width and height of an image if layout is not fill.
+ * @param {string} layout next/image layout options.
+ * @param {number} width Width of the image.
+ * @param {number} height Height of the image.
+ */
+function calcIntrinsicDimensions(
+  matchesDesktop,
+  matchesMobile,
+  layout,
+  width,
+  height
+) {
+  let imageWidth;
+  let imageHeight;
+  // Image requires width and height only if layout is not fill
+  if (layout !== 'fill') {
+    imageWidth = width;
+    imageHeight = height;
+
+    if (!imageWidth) {
+      imageWidth = matchesDesktop
+        ? deviceColumnWidth.desktop[1]
+        : matchesMobile
+        ? deviceColumnWidth.mobile[1]
+        : deviceColumnWidth.tablet[1];
+    }
+
+    if (!imageHeight) {
+      imageHeight = matchesDesktop
+        ? deviceRowHeight.desktop[1]
+        : matchesMobile
+        ? deviceRowHeight.mobile[1]
+        : deviceRowHeight.tablet[1];
+    }
+  }
+  return { imageWidth, imageHeight };
 }

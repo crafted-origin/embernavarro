@@ -6,7 +6,7 @@ import particlesOptions from '../src/particles.json';
 import Layout from '@/components/shared/layouts/layout';
 import { getDataForIndex } from '@/lib/api';
 import IntroductionSection from '@/components/pages/home/introduction-section';
-import ProjectSectionMasonry from '@/components/pages/home/project-section-masonry';
+import SectionProjectMasonry from '@/components/pages/home/section-project-masonry';
 import { makeStyles } from '@material-ui/core';
 import { useRef } from 'react';
 
@@ -76,7 +76,7 @@ function IndexPage(props) {
             )}
 
             {projectSectionData && (
-              <ProjectSectionMasonry data={getSectionData('SectionProject')} />
+              <SectionProjectMasonry data={getSectionData('SectionProject')} />
             )}
           </div>
         </ResizeObserver>

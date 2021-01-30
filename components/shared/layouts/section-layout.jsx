@@ -14,7 +14,8 @@ export default function SectionLayout(props) {
       }}
       mx="auto"
       mb={mb}
-      px={2.5}
+      pb={4}
+      px={{ xs: '15px', sm: '17px', lg: '20px' }}
     >
       {children}
     </Box>

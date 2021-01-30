@@ -1,26 +1,34 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import { red } from '@material-ui/core/colors';
 
 import colors from './colors';
 
+// * Must provide all keys with values if overriding.
+// ! Else some of the breakpoint functions won't work properly.
+// * https://material-ui.com/customization/breakpoints/#custom-breakpoints
 const BREAKPOINTS = {
-  xs: 376,
-  sm: 812,
-  lg: 1232,
+  xs: 412,
+  sm: 846,
+  md: 960,
+  lg: 1272,
+  xl: 1920,
 };
 
+/**
+ * The default theme variables used to refer in the custom theme below.
+ * ! Do not use any of these properties anywhere else other than the below theme.
+ */
 const defaultTheme = createMuiTheme({
   breakpoints: {
-    keys: ['xs', 'sm', 'lg'],
     values: BREAKPOINTS,
   },
   typography: {
     fontSize: 16,
+    htmlFontSize: 16,
+    fontFamily: "'Jost', 'Arial', sans-serif",
   },
 });
 
-// Create a theme instance.
 const theme = createMuiTheme({
   ...defaultTheme,
   particles: {
@@ -31,6 +39,8 @@ const theme = createMuiTheme({
     zIndex: '-1',
   },
   typography: {
+    // Deep merge from default theme and custom theme.
+    ...defaultTheme.typography,
     body1: {
       fontFamily: "'Jost', sans-serif",
       fontSize: `${12 / defaultTheme.typography.fontSize}rem`,
@@ -47,7 +57,31 @@ const theme = createMuiTheme({
       fontFamily: "'Josefin Sans', sans-serif",
     },
     h2: {
-      fontFamily: "'Jost', sans-serif",
+      fontFamily: defaultTheme.typography.fontFamily,
+      fontSize: `${24 / defaultTheme.typography.fontSize}rem`,
+      fontWeight: 700,
+      [defaultTheme.breakpoints.up('sm')]: {
+        fontSize: `${30 / defaultTheme.typography.fontSize}rem`,
+      },
+      [defaultTheme.breakpoints.up('lg')]: {
+        fontSize: `${40 / defaultTheme.typography.fontSize}rem`,
+      },
+    },
+    h3: {
+      fontFamily: "'Josefin Sans', sans-serif",
+      fontSize: `${18 / defaultTheme.typography.fontSize}rem`,
+      fontWeight: 100,
+      [defaultTheme.breakpoints.up('sm')]: {
+        fontSize: `${20 / defaultTheme.typography.fontSize}rem`,
+      },
+      [defaultTheme.breakpoints.up('lg')]: {
+        fontSize: `${30 / defaultTheme.typography.fontSize}rem`,
+      },
+    },
+    h4: {
+      fontFamily: "'Jost', 'Arial', sans-serif",
+      fontSize: `${14 / defaultTheme.typography.fontSize}rem`,
+      fontWeight: 300,
     },
   },
   subtitle: {
@@ -64,7 +98,7 @@ const theme = createMuiTheme({
   description: {
     color: colors.white[400],
     [defaultTheme.breakpoints.up('sm')]: {
-      width: `${647 / defaultTheme.typography.fontSize}rem`,
+      width: `${674 / defaultTheme.typography.fontSize}rem`,
     },
     [defaultTheme.breakpoints.up('lg')]: {
       width: `${850 / defaultTheme.typography.fontSize}rem`,
@@ -73,6 +107,14 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: '#556cd6',
+    },
+    text: {
+      primary: colors.grey[400],
+      secondary: colors.white[400],
+    },
+    action: {
+      hover: colors.blue[300],
+      active: colors.blue[300],
     },
     secondary: {
       main: '#19857b',
