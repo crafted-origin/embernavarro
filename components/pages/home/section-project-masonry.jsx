@@ -165,6 +165,7 @@ export default function SectionProjectMasonry(props) {
                     // Required to show border-radius
                     overflow="hidden"
                     borderRadius={10}
+                    style={{ cursor: 'pointer' }}
                   >
                     <Image
                       src={image.url}

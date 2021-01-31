@@ -32,7 +32,7 @@ const defaultTheme = createMuiTheme({
 const theme = createMuiTheme({
   ...defaultTheme,
   particles: {
-    position: 'fixed',
+    position: 'absolute',
     width: '100%',
     margin: '0',
     padding: '0',
@@ -82,6 +82,17 @@ const theme = createMuiTheme({
       fontFamily: "'Jost', 'Arial', sans-serif",
       fontSize: `${14 / defaultTheme.typography.fontSize}rem`,
       fontWeight: 300,
+    },
+    h5: {
+      fontFamily: "'Jost', 'Arial', sans-serif",
+      fontSize: `${14 / defaultTheme.typography.fontSize}rem`,
+      fontWeight: 300,
+      [defaultTheme.breakpoints.up('sm')]: {
+        fontSize: `${16 / defaultTheme.typography.fontSize}rem`,
+      },
+      [defaultTheme.breakpoints.up('lg')]: {
+        fontSize: `${20 / defaultTheme.typography.fontSize}rem`,
+      },
     },
   },
   subtitle: {

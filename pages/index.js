@@ -2,14 +2,15 @@ import { useState } from 'react';
 import Particles from 'react-tsparticles';
 import ResizeObserver from 'rc-resize-observer';
 import Image from 'next/image';
+import { makeStyles } from '@material-ui/core';
+import { useRef } from 'react';
 
 import particlesOptions from '../src/particles.json';
 import Layout from '@/components/shared/layouts/layout';
 import { getDataForIndex } from '@/lib/api';
 import IntroductionSection from '@/components/pages/home/introduction-section';
 import SectionProjectMasonry from '@/components/pages/home/section-project-masonry';
-import { makeStyles } from '@material-ui/core';
-import { useRef } from 'react';
+import SectionClient from '@/components/pages/home/section-client';
 
 const useStyles = makeStyles(theme => ({
   mainTsParticles: {
@@ -17,7 +18,8 @@ const useStyles = makeStyles(theme => ({
     height: props => props.firstWrapperHeight,
   },
   secondTsParticles: {
-    height: '500px',
+    ...theme.particles,
+    height: '1000px',
   },
 }));
 
@@ -93,6 +95,8 @@ function IndexPage(props) {
             />
           </div>
         </ResizeObserver>
+
+        {<SectionClient data={null} />}
 
         {/* Imitate tsParticles for now */}
         <div
