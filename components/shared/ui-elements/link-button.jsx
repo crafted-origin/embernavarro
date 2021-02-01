@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import { Link, makeStyles } from '@material-ui/core';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
-  filterButton: props => ({
-    backgroundColor: props.backgroundColor,
-    margin: '0 22px',
-    color: props.active && theme.palette.action.active,
-    fontWeight: props.active && 700,
+  default: props => ({
+    color: props.isSelected && theme.palette.action.active,
+    fontWeight: props.isSelected && 700,
     '&:hover': {
       color: theme.palette.action.hover,
       fontWeight: 700,
@@ -15,22 +14,27 @@ const useStyles = makeStyles(theme => ({
       color: props => props.active && theme.palette.action.active,
     },
   }),
+  filterButton: {
+    margin: '0 22px',
+  },
 }));
 
 export default function LinkButton(props) {
   const {
+    className,
     children,
     variant,
     color,
     onLinkButtonClick,
-    active,
+    isSelected,
     ...rest
   } = props;
   const classes = useStyles(props);
+  const combinedClassNames = clsx(classes.default, classes[className]);
 
   return (
     <Link
-      className={classes.filterButton}
+      className={combinedClassNames}
       component="button"
       variant={variant}
       color={color}
@@ -55,5 +59,5 @@ LinkButton.prototype = {
     'error',
   ]),
   onLinkButtonClick: PropTypes.func,
-  active: PropTypes.bool,
+  isSelected: PropTypes.bool,
 };

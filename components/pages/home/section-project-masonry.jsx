@@ -87,9 +87,10 @@ export default function SectionProjectMasonry(props) {
   const projectFilters = types.map((type, index) => (
     <LinkButton
       key={index}
+      className="filterButton"
       variant="h4"
       color="textSecondary"
-      active={type === selectedType}
+      isSelected={type === selectedType}
       onLinkButtonClick={() => {
         onFilterClick(type);
       }}
