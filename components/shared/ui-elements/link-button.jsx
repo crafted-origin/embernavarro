@@ -1,11 +1,21 @@
 import PropTypes from 'prop-types';
 import { Link, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
+import colors from '@/utility/colors';
 
 const useStyles = makeStyles(theme => ({
-  default: props => ({
-    color: props.isSelected && theme.palette.action.active,
-    fontWeight: props.isSelected && 700,
+  filterButton: {
+    // Need more specificity to override default styles
+    'button&': {
+      margin: '0 22px',
+      color: props =>
+        props.isSelected ? theme.palette.action.active : colors.white[400],
+    },
+  },
+  default: {
+    color: props =>
+      props.isSelected ? theme.palette.action.active : colors.blue[400],
+    fontWeight: props => props.isSelected && 700,
     '&:hover': {
       color: theme.palette.action.hover,
       fontWeight: 700,
@@ -13,9 +23,6 @@ const useStyles = makeStyles(theme => ({
     '&:active': {
       color: props => props.active && theme.palette.action.active,
     },
-  }),
-  filterButton: {
-    margin: '0 22px',
   },
 }));
 
