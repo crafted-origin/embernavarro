@@ -4,6 +4,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  IconButton,
   Typography,
   makeStyles,
 } from '@material-ui/core';
@@ -43,7 +44,13 @@ const useStyles = makeStyles(theme => ({
   },
   cardActions: {
     justifyContent: 'flex-end',
-    padding: '0 20px 20px',
+    padding: '0 8px 8px 20px',
+  },
+  linkContainer: {
+    margin: '0 7.5px',
+    '&:last-child': {
+      marginRight: 0,
+    },
   },
 }));
 
@@ -89,7 +96,23 @@ export default function SectionClient(props) {
               </Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-              <LinkButton variant="h4">WEBSITE</LinkButton>
+              <Box className={classes.linkContainer}>
+                <LinkButton variant="h4">WEBSITE</LinkButton>
+              </Box>
+              <Box className={classes.linkContainer}>
+                <IconButton edge="start">
+                  <Box width={22} height={22}>
+                    <Image
+                      src="/facebook-icon.svg"
+                      alt="facebook"
+                      layout="responsive"
+                      width={22}
+                      height={22}
+                      quality={45}
+                    />
+                  </Box>
+                </IconButton>
+              </Box>
             </CardActions>
           </Card>
         </Grid>
