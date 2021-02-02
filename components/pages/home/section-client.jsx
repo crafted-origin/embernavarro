@@ -8,10 +8,12 @@ import {
   Typography,
   makeStyles,
 } from '@material-ui/core';
+import { StarBorder, Star } from '@material-ui/icons';
 import Image from 'next/image';
 
 import SectionLayout from '@/components/shared/layouts/section-layout';
 import LinkButton from '@/components/shared/ui-elements/link-button';
+import { useState } from 'react';
 
 const useStyles = makeStyles(theme => ({
   firstImageContainer: { width: '610px', height: '400px' },
@@ -56,6 +58,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function SectionClient(props) {
   const classes = useStyles();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const onFavoriteClick = () => {
+    setIsFavorite(isFavorite => !isFavorite);
+  };
 
   return (
     <SectionLayout>
@@ -85,9 +92,18 @@ export default function SectionClient(props) {
 
           <Card className={classes.card} variant="outlined">
             <CardContent>
-              <Typography variant="h5" component="h2">
-                Green Stone Wellness Clinic
-              </Typography>
+              <Box display="flex" alignItems="center">
+                <IconButton
+                  aria-label="favorite"
+                  edge="start"
+                  onClick={onFavoriteClick}
+                >
+                  {isFavorite ? <Star /> : <StarBorder />}
+                </IconButton>
+                <Typography variant="h5" component="h2">
+                  Green Stone Wellness Clinic
+                </Typography>
+              </Box>
               <Typography variant="body1" component="p">
                 Description and blurb here it will fade when sentences are too
                 long, like this one. The default of the card is faded white and
