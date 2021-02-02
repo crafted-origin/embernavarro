@@ -1,7 +1,7 @@
 import { Box, useTheme } from '@material-ui/core';
 
 export default function SectionLayout(props) {
-  const { mb, children } = props;
+  const { mb, children, ...rest } = props;
   const theme = useTheme();
 
   return (
@@ -13,10 +13,9 @@ export default function SectionLayout(props) {
         lg: theme.breakpoints.values.lg,
       }}
       mx="auto"
-      mb={mb}
       pb={4}
       px={{ xs: '15px', sm: '17px', lg: '20px' }}
-      minHeight={props.minHeight}
+      {...rest}
     >
       {children}
     </Box>
