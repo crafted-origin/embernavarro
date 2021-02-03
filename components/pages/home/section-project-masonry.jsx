@@ -11,8 +11,8 @@ import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 // Minimum column width per tile for each device.
 const deviceColumnWidth = {
   desktop: [191, 296, 400, 504, 608],
-  tablet: [122, 191, 260, 397],
-  mobile: [88, 120, 248],
+  tablet: [122, 191, 260, 329, 397],
+  mobile: [88, 120, 152, 184, 216, 248, 280],
 };
 
 // All possible tile heights for each device.
