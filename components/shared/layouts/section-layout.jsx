@@ -8,13 +8,13 @@ export default function SectionLayout(props) {
     <Box
       className="section-layout"
       maxWidth={{
-        xs: theme.breakpoints.values.xs,
-        sm: theme.breakpoints.values.sm,
+        xs: theme.breakpoints.values.sm,
+        md: theme.breakpoints.values.md,
         lg: theme.breakpoints.values.lg,
       }}
       mx="auto"
       pb={4}
-      px={{ xs: '15px', sm: '17px', lg: '20px' }}
+      px={{ xs: '15px', md: '17px', lg: '20px' }}
       {...rest}
     >
       {children}

@@ -7,9 +7,9 @@ import colors from './colors';
 // ! Else some of the breakpoint functions won't work properly.
 // * https://material-ui.com/customization/breakpoints/#custom-breakpoints
 const BREAKPOINTS = {
-  xs: 412,
-  sm: 846,
-  md: 960,
+  xs: 0,
+  sm: 412,
+  md: 846,
   lg: 1272,
   xl: 1920,
 };
@@ -46,7 +46,7 @@ const theme = createMuiTheme({
       fontSize: `${12 / defaultTheme.typography.fontSize}rem`,
       color: colors.grey[400],
       fontWeight: 300,
-      [defaultTheme.breakpoints.up('sm')]: {
+      [defaultTheme.breakpoints.up('md')]: {
         fontSize: `${14 / defaultTheme.typography.fontSize}rem`,
       },
       [defaultTheme.breakpoints.up('lg')]: {
@@ -60,7 +60,7 @@ const theme = createMuiTheme({
       fontFamily: defaultTheme.typography.fontFamily,
       fontSize: `${24 / defaultTheme.typography.fontSize}rem`,
       fontWeight: 700,
-      [defaultTheme.breakpoints.up('sm')]: {
+      [defaultTheme.breakpoints.up('md')]: {
         fontSize: `${30 / defaultTheme.typography.fontSize}rem`,
       },
       [defaultTheme.breakpoints.up('lg')]: {
@@ -71,7 +71,7 @@ const theme = createMuiTheme({
       fontFamily: "'Josefin Sans', sans-serif",
       fontSize: `${18 / defaultTheme.typography.fontSize}rem`,
       fontWeight: 100,
-      [defaultTheme.breakpoints.up('sm')]: {
+      [defaultTheme.breakpoints.up('md')]: {
         fontSize: `${20 / defaultTheme.typography.fontSize}rem`,
       },
       [defaultTheme.breakpoints.up('lg')]: {
@@ -87,7 +87,7 @@ const theme = createMuiTheme({
       fontFamily: "'Jost', 'Arial', sans-serif",
       fontSize: `${14 / defaultTheme.typography.fontSize}rem`,
       fontWeight: 300,
-      [defaultTheme.breakpoints.up('sm')]: {
+      [defaultTheme.breakpoints.up('md')]: {
         fontSize: `${16 / defaultTheme.typography.fontSize}rem`,
       },
       [defaultTheme.breakpoints.up('lg')]: {
@@ -99,7 +99,7 @@ const theme = createMuiTheme({
     color: colors.white[400],
     fontFamily: "'Josefin Sans', sans-serif",
     fontSize: `${18 / defaultTheme.typography.fontSize}rem`,
-    [defaultTheme.breakpoints.up('sm')]: {
+    [defaultTheme.breakpoints.up('md')]: {
       fontSize: `${20 / defaultTheme.typography.fontSize}rem`,
     },
     [defaultTheme.breakpoints.up('lg')]: {
@@ -108,7 +108,7 @@ const theme = createMuiTheme({
   },
   description: {
     color: colors.white[400],
-    [defaultTheme.breakpoints.up('sm')]: {
+    [defaultTheme.breakpoints.up('md')]: {
       width: `${674 / defaultTheme.typography.fontSize}rem`,
     },
     [defaultTheme.breakpoints.up('lg')]: {

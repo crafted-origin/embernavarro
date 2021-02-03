@@ -27,10 +27,10 @@ export default function SectionProjectMasonry(props) {
   const theme = useTheme();
   // ! Need to disable SSR to have proper matches on initial load.
   // ! https://github.com/mui-org/material-ui/pull/23806/files
-  const matchesMobile = useMediaQuery(theme.breakpoints.down('xs'), {
+  const matchesMobile = useMediaQuery(theme.breakpoints.down('md'), {
     noSsr: true,
   });
-  const matchesTablet = useMediaQuery(theme.breakpoints.between('sm', 'lg'), {
+  const matchesTablet = useMediaQuery(theme.breakpoints.up('md'), {
     noSsr: true,
   });
   const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
@@ -162,7 +162,7 @@ export default function SectionProjectMasonry(props) {
                     key={image.sys.id}
                     height={calcDimensions().xBlockHeight}
                     position="relative"
-                    m={{ xs: 0.5, sm: 1, lg: 1 }}
+                    m={{ xs: 0.5, md: 1, lg: 1 }}
                     // Required to show border-radius
                     overflow="hidden"
                     borderRadius={10}

@@ -9,8 +9,8 @@ const useStyles = makeStyles(theme => ({
     ...theme.subtitle,
     marginBottom: '20px',
     // Need a deep merge since theme already contains the same key.
-    [theme.breakpoints.up('sm')]: {
-      ...theme.subtitle[theme.breakpoints.up('sm')],
+    [theme.breakpoints.up('md')]: {
+      ...theme.subtitle[theme.breakpoints.up('md')],
       marginBottom: '20px',
     },
     [theme.breakpoints.up('lg')]: {
