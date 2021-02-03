@@ -3,6 +3,7 @@ import { makeStyles, Typography } from '@material-ui/core';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import colors from '@/utility/colors';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   subtitle: {
@@ -18,19 +19,37 @@ const useStyles = makeStyles(theme => ({
       marginBottom: '30px',
     },
   },
-  description: {
-    ...theme.description,
-  },
-  sectionTitle: {
+  h2Default: {
     textAlign: 'center',
     color: colors.white[400],
     marginBottom: '10px',
   },
+  h2Type1: {
+    color: colors.grey[400],
+  },
+  description: {
+    ...theme.description,
+  },
+  description1: { color: colors.grey[400] },
 }));
 
 export default function RichTextBlock(props) {
-  const { data, isSectionTitle, isSubtitle, isDescription } = props;
+  const {
+    data,
+    h2ClassName,
+    descriptionClassName,
+    isSubtitle,
+    descriptionVariant,
+  } = props;
   const classes = useStyles();
+  const h2ClassNames = clsx(
+    classes.h2Default,
+    h2ClassName && classes[h2ClassName]
+  );
+  const descriptionClassNames = clsx(
+    classes.description,
+    descriptionClassName && classes[descriptionClassName]
+  );
 
   const RICHTEXT_OPTIONS = {
     renderNode: {
@@ -39,10 +58,7 @@ export default function RichTextBlock(props) {
       },
       [BLOCKS.HEADING_2]: (node, children) => {
         return (
-          <Typography
-            variant="h2"
-            className={isSectionTitle && classes.sectionTitle}
-          >
+          <Typography variant="h2" className={h2ClassNames}>
             {children}
           </Typography>
         );
@@ -57,8 +73,8 @@ export default function RichTextBlock(props) {
       [BLOCKS.PARAGRAPH]: (node, children) => {
         return (
           <Typography
-            className={isDescription && classes.description}
-            variant="body1"
+            className={descriptionClassNames}
+            variant={descriptionVariant}
           >
             {children}
           </Typography>

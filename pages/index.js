@@ -8,7 +8,7 @@ import { useRef } from 'react';
 import particlesOptions from '../src/particles.json';
 import Layout from '@/components/shared/layouts/layout';
 import { getDataForIndex } from '@/lib/api';
-import IntroductionSection from '@/components/pages/home/introduction-section';
+import SectionIntroduction from '@/components/pages/home/section-introduction';
 import SectionProjectMasonry from '@/components/pages/home/section-project-masonry';
 import SectionClient from '@/components/pages/home/section-client';
 
@@ -39,6 +39,7 @@ function IndexPage(props) {
 
   const introductionSectionData = getSectionData('SectionIntroduction');
   const projectSectionData = getSectionData('SectionProject');
+  const clientSectionData = getSectionData('SectionClient');
 
   const onResize = resizeObserverProps => {
     setFirstWrapperHeight(resizeObserverProps.height);
@@ -76,7 +77,7 @@ function IndexPage(props) {
         <ResizeObserver onResize={onResize}>
           <div ref={firstWrapperRef}>
             {introductionSectionData && (
-              <IntroductionSection data={introductionSectionData} />
+              <SectionIntroduction data={introductionSectionData} />
             )}
 
             {projectSectionData && (
@@ -96,7 +97,7 @@ function IndexPage(props) {
           </div>
         </ResizeObserver>
 
-        {<SectionClient data={null} />}
+        {<SectionClient data={clientSectionData} />}
 
         {/* Imitate tsParticles for now */}
         <div

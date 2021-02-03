@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function IntroductionSection(props) {
+export default function SectionIntroduction(props) {
   const { data } = props;
   const classes = useStyles(props);
   const logoImagesCollection = data.sectionType?.logoImagesCollection;
@@ -79,7 +79,7 @@ export default function IntroductionSection(props) {
           {renderLogoImage()}
         </Grid>
         <Grid className={classes.gridItemDescription} item xs>
-          <RichTextBlock data={description?.json} isSubtitle isDescription />
+          <RichTextBlock data={description?.json} isSubtitle />
         </Grid>
       </Grid>
     </SectionLayout>

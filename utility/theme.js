@@ -108,6 +108,7 @@ const theme = createMuiTheme({
   },
   description: {
     color: colors.white[400],
+    textAlign: 'center',
     [defaultTheme.breakpoints.up('md')]: {
       width: `${674 / defaultTheme.typography.fontSize}rem`,
     },

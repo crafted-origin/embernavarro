@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Box,
   Grid,
@@ -13,7 +14,7 @@ import Image from 'next/image';
 
 import SectionLayout from '@/components/shared/layouts/section-layout';
 import LinkButton from '@/components/shared/ui-elements/link-button';
-import { useState } from 'react';
+import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 
 const useStyles = makeStyles(theme => ({
   firstImageContainer: { width: '610px', height: '400px' },
@@ -57,6 +58,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SectionClient(props) {
+  console.log(props);
+  const { data } = props;
   const classes = useStyles();
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -66,7 +69,14 @@ export default function SectionClient(props) {
 
   return (
     <SectionLayout>
-      <Grid container spacing={2}>
+      <Box mb="20px">
+        <RichTextBlock
+          data={data.description?.json}
+          h2ClassName="h2Type1"
+          descriptionClassName="description1"
+        />
+      </Box>
+      <Grid container>
         <Grid className={classes.clientContainer} item xs={12}>
           <Box className={classes.firstImageContainer}>
             <Image

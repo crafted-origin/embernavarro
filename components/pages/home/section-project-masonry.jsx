@@ -102,7 +102,7 @@ export default function SectionProjectMasonry(props) {
   return (
     <SimpleReactLightbox>
       <SectionLayout minHeight="800px">
-        <Box mb={'10px'}>
+        <Box mb="10px">
           <RichTextBlock data={data.description?.json} isSectionTitle />
         </Box>
         <Box display="flex" justifyContent="center" marginBottom="20px">
