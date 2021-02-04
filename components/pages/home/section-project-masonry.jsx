@@ -88,6 +88,7 @@ export default function SectionProjectMasonry(props) {
     <LinkButton
       key={index}
       className="filterButton"
+      component="button"
       variant="h4"
       color="textSecondary"
       isSelected={type === selectedType}

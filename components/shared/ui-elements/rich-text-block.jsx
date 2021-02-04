@@ -32,7 +32,16 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '5px',
   },
   description: {
-    ...theme.description,
+    color: colors.white[400],
+    textAlign: 'center',
+  },
+  introductionDescription: {
+    [theme.breakpoints.up('md')]: {
+      width: `${674 / theme.typography.fontSize}rem`,
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: `${850 / theme.typography.fontSize}rem`,
+    },
   },
   description1: { color: colors.grey[400] },
   clientCardDescription: {
@@ -135,4 +144,7 @@ RichTextBlock.prototype = {
   h5ClassName: PropTypes.string,
   descriptionClassName: PropTypes.string,
   descriptionVariant: PropTypes.string,
+  isTitleWithIcon: PropTypes.boolean,
+  onTitleWithIconClick: PropTypes.func,
+  isFavorite: PropTypes.boolean,
 };

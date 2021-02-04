@@ -106,16 +106,6 @@ const theme = createMuiTheme({
       fontSize: `${30 / defaultTheme.typography.fontSize}rem`,
     },
   },
-  description: {
-    color: colors.white[400],
-    textAlign: 'center',
-    [defaultTheme.breakpoints.up('md')]: {
-      width: `${674 / defaultTheme.typography.fontSize}rem`,
-    },
-    [defaultTheme.breakpoints.up('lg')]: {
-      width: `${850 / defaultTheme.typography.fontSize}rem`,
-    },
-  },
   palette: {
     primary: {
       main: '#556cd6',

@@ -42,7 +42,6 @@ export default function LinkButton(props) {
   return (
     <Link
       className={combinedClassNames}
-      component="button"
       variant={variant}
       color={color}
       onClick={onLinkButtonClick}

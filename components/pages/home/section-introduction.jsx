@@ -79,7 +79,11 @@ export default function SectionIntroduction(props) {
           {renderLogoImage()}
         </Grid>
         <Grid className={classes.gridItemDescription} item xs>
-          <RichTextBlock data={description?.json} isSubtitle />
+          <RichTextBlock
+            data={description?.json}
+            isSubtitle
+            descriptionClassName="introductionDescription"
+          />
         </Grid>
       </Grid>
     </SectionLayout>
