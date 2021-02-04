@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Particles from 'react-tsparticles';
 import ResizeObserver from 'rc-resize-observer';
 import Image from 'next/image';
-import { makeStyles } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import { useRef } from 'react';
 
 import particlesOptions from '../src/particles.json';
@@ -75,7 +75,10 @@ function IndexPage(props) {
         ></div>
 
         <ResizeObserver onResize={onResize}>
-          <div ref={firstWrapperRef}>
+          <Box
+            ref={firstWrapperRef}
+            mb={{ xs: '50px', md: '100px', lg: '200px' }}
+          >
             {introductionSectionData && (
               <SectionIntroduction data={introductionSectionData} />
             )}
@@ -94,7 +97,7 @@ function IndexPage(props) {
               height={300}
               quality={45}
             />
-          </div>
+          </Box>
         </ResizeObserver>
 
         {clientSectionData && <SectionClient data={clientSectionData} />}
