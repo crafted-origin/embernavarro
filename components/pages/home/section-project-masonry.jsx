@@ -38,7 +38,7 @@ export default function SectionProjectMasonry(props) {
   });
   const [initialTileData, setInitialTileData] = useState([]);
   const [tileData, setTileData] = useState([]);
-  const [types, setTypes] = useState([]);
+  const [types, setTypes] = useState(['all', 'website', 'mobile', 'merch']);
   const [selectedType, setSelectedType] = useState('All');
   // * Desktop matches first then mobile to cover max and min.
   const targetBlockWidth = matchesDesktop
@@ -48,35 +48,20 @@ export default function SectionProjectMasonry(props) {
     : deviceColumnWidth.tablet[0];
 
   useEffect(() => {
-    const gridListTypesCollectionItems =
-      data?.sectionType.gridList?.gridListTypesCollection?.items;
-
-    // Combine all tile data into one single array of objects containing all projects.
-    const allTileData = gridListTypesCollectionItems.flatMap(data => {
-      // Add project type to each gridListTilesCollection for filtering later
-      const combinedTileData = data?.gridListTilesCollection?.items.map(
-        item => {
-          return { ...item, type: data?.type };
-        }
-      );
-
-      // A 3D array flattened to a 2D array.
-      return combinedTileData;
-    });
-
-    const allProjectTypes = gridListTypesCollectionItems.map(item => item.type);
+    const gridList = data?.sectionType.gridList;
+    const allTileData = gridList.gridListTilesCollection?.items;
+    // Todo: Move these to CMS
 
     setInitialTileData(allTileData);
     setTileData(allTileData);
-    setTypes(['All', ...allProjectTypes]);
   }, [props.data]);
 
   const onFilterClick = type => {
-    if (type === 'All') {
+    if (type === 'all') {
       setTileData(initialTileData);
     } else {
-      const projectTileData = initialTileData.filter(
-        data => data.type === type
+      const projectTileData = initialTileData.filter(data =>
+        data.types.includes(type)
       );
       setTileData(projectTileData);
     }

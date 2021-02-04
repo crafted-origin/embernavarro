@@ -5,6 +5,7 @@ import colors from '@/utility/colors';
 
 const useStyles = makeStyles(theme => ({
   filterButton: {
+    textTransform: 'capitalize',
     // Need more specificity to override default styles
     'button&': {
       margin: '0 22px',
