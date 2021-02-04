@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Box, Typography, IconButton } from '@material-ui/core';
 import { StarBorder, Star } from '@material-ui/icons';
@@ -60,10 +61,13 @@ export default function RichTextBlock(props) {
     isSubtitle,
     descriptionVariant,
     isTitleWithIcon,
-    onTitleWithIconClick,
-    isFavorite,
   } = props;
   const classes = useStyles();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const onFavoriteClick = () => {
+    setIsFavorite(isFavorite => !isFavorite);
+  };
 
   const h2ClassNames = clsx(
     classes.h2Default,
@@ -103,7 +107,7 @@ export default function RichTextBlock(props) {
               <IconButton
                 aria-label="favorite"
                 edge="start"
-                onClick={onTitleWithIconClick}
+                onClick={onFavoriteClick}
               >
                 {isFavorite ? <Star /> : <StarBorder />}
               </IconButton>
@@ -145,6 +149,4 @@ RichTextBlock.prototype = {
   descriptionClassName: PropTypes.string,
   descriptionVariant: PropTypes.string,
   isTitleWithIcon: PropTypes.boolean,
-  onTitleWithIconClick: PropTypes.func,
-  isFavorite: PropTypes.boolean,
 };

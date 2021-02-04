@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Box,
   Grid,
@@ -76,11 +75,6 @@ export default function SectionClient(props) {
   const { data } = props;
   const clients = data?.sectionType?.clientsCollection.items;
   const classes = useStyles();
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  const onFavoriteClick = () => {
-    setIsFavorite(isFavorite => !isFavorite);
-  };
 
   const clientCards = clients.map(client => {
     const { title, image, hoverImage, linksCollection } = client;
@@ -125,8 +119,6 @@ export default function SectionClient(props) {
               descriptionVariant="body1"
               descriptionClassName="clientCardDescription"
               isTitleWithIcon
-              onTitleWithIconClick={onFavoriteClick}
-              isFavorite={isFavorite}
             />
           </CardContent>
           <CardActions className={classes.cardActions}>
@@ -139,7 +131,7 @@ export default function SectionClient(props) {
                       {name}
                     </LinkButton>
                   ) : (
-                    <IconButton edge="start">
+                    <IconButton href={url} edge="start">
                       <Box width={icon.width} height={icon.height}>
                         <Image
                           src={icon.image.url}
