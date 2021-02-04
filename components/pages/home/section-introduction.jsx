@@ -58,8 +58,8 @@ export default function SectionIntroduction(props) {
           layout={image.layout}
           width={image.width}
           height={image.height}
-          objectFit={'cover'}
-          objectPosition={image.objectPosition || 'center center'}
+          objectFit={image.objectFit}
+          objectPosition={image.objectPosition}
           quality={image.quality || 45}
         />
       </Box>
