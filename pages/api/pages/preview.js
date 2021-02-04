@@ -31,7 +31,7 @@ export default async function preview(req, res) {
   // Redirect to the path from the fetched post
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
   // res.writeHead(307, { Location: `/${page.slug}` })
-  const url = data.slug === '/' ? '/' : `/${data.slug}`;
+  const url = data.slug === '/' ? '/?data=preview' : `/${data.slug}`;
   res.write(
     `<!DOCTYPE html><html><head><meta http-equiv="Refresh" content="0; url=${url}" />
     <script>window.location.href = '${url}'</script>
