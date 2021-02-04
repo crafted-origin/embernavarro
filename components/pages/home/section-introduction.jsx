@@ -2,12 +2,9 @@ import {
   Box,
   Grid,
   makeStyles,
-  Typography,
   useMediaQuery,
   useTheme,
 } from '@material-ui/core';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS } from '@contentful/rich-text-types';
 import Image from 'next/image';
 
 import SectionLayout from '@/components/shared/layouts/section-layout';
@@ -22,13 +19,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function IntroductionSection(props) {
+export default function SectionIntroduction(props) {
   const { data } = props;
   const classes = useStyles(props);
   const logoImagesCollection = data.sectionType?.logoImagesCollection;
   const theme = useTheme();
-  const matchesMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const matchesTablet = useMediaQuery(theme.breakpoints.up('sm'));
+  const matchesMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const matchesTablet = useMediaQuery(theme.breakpoints.up('md'));
   const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   const description = matchesMobile
@@ -61,8 +58,8 @@ export default function IntroductionSection(props) {
           layout={image.layout}
           width={image.width}
           height={image.height}
-          objectFit={'cover'}
-          objectPosition={image.objectPosition || 'center center'}
+          objectFit={image.objectFit}
+          objectPosition={image.objectPosition}
           quality={image.quality || 45}
         />
       </Box>
@@ -70,7 +67,7 @@ export default function IntroductionSection(props) {
   };
 
   return (
-    <SectionLayout mb={{ lg: '100px', sm: '50px', xs: '50px' }}>
+    <SectionLayout mb={{ xs: '50px', md: '50px', lg: '100px' }}>
       <Grid
         className={classes.container}
         container
@@ -82,7 +79,11 @@ export default function IntroductionSection(props) {
           {renderLogoImage()}
         </Grid>
         <Grid className={classes.gridItemDescription} item xs>
-          <RichTextBlock data={description?.json} isSubtitle isDescription />
+          <RichTextBlock
+            data={description?.json}
+            isSubtitle
+            descriptionClassName="introductionDescription"
+          />
         </Grid>
       </Grid>
     </SectionLayout>

@@ -11,8 +11,8 @@ import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 // Minimum column width per tile for each device.
 const deviceColumnWidth = {
   desktop: [191, 296, 400, 504, 608],
-  tablet: [122, 191, 260, 397],
-  mobile: [88, 120, 248],
+  tablet: [122, 191, 260, 329, 397],
+  mobile: [88, 120, 152, 184, 216, 248, 280],
 };
 
 // All possible tile heights for each device.
@@ -27,10 +27,10 @@ export default function SectionProjectMasonry(props) {
   const theme = useTheme();
   // ! Need to disable SSR to have proper matches on initial load.
   // ! https://github.com/mui-org/material-ui/pull/23806/files
-  const matchesMobile = useMediaQuery(theme.breakpoints.down('xs'), {
+  const matchesMobile = useMediaQuery(theme.breakpoints.down('md'), {
     noSsr: true,
   });
-  const matchesTablet = useMediaQuery(theme.breakpoints.between('sm', 'lg'), {
+  const matchesTablet = useMediaQuery(theme.breakpoints.up('md'), {
     noSsr: true,
   });
   const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
@@ -87,9 +87,11 @@ export default function SectionProjectMasonry(props) {
   const projectFilters = types.map((type, index) => (
     <LinkButton
       key={index}
+      className="filterButton"
+      component="button"
       variant="h4"
       color="textSecondary"
-      active={type === selectedType}
+      isSelected={type === selectedType}
       onLinkButtonClick={() => {
         onFilterClick(type);
       }}
@@ -101,7 +103,7 @@ export default function SectionProjectMasonry(props) {
   return (
     <SimpleReactLightbox>
       <SectionLayout minHeight="800px">
-        <Box mb={'10px'}>
+        <Box mb="10px">
           <RichTextBlock data={data.description?.json} isSectionTitle />
         </Box>
         <Box display="flex" justifyContent="center" marginBottom="20px">
@@ -161,10 +163,11 @@ export default function SectionProjectMasonry(props) {
                     key={image.sys.id}
                     height={calcDimensions().xBlockHeight}
                     position="relative"
-                    m={{ xs: 0.5, sm: 1, lg: 1 }}
+                    m={{ xs: 0.5, md: 1, lg: 1 }}
                     // Required to show border-radius
                     overflow="hidden"
                     borderRadius={10}
+                    style={{ cursor: 'pointer' }}
                   >
                     <Image
                       src={image.url}

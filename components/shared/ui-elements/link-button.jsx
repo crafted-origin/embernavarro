@@ -1,12 +1,21 @@
 import PropTypes from 'prop-types';
 import { Link, makeStyles } from '@material-ui/core';
+import clsx from 'clsx';
+import colors from '@/utility/colors';
 
 const useStyles = makeStyles(theme => ({
-  filterButton: props => ({
-    backgroundColor: props.backgroundColor,
-    margin: '0 22px',
-    color: props.active && theme.palette.action.active,
-    fontWeight: props.active && 700,
+  filterButton: {
+    // Need more specificity to override default styles
+    'button&': {
+      margin: '0 22px',
+      color: props =>
+        props.isSelected ? theme.palette.action.active : colors.white[400],
+    },
+  },
+  default: {
+    color: props =>
+      props.isSelected ? theme.palette.action.active : colors.blue[400],
+    fontWeight: props => props.isSelected && 700,
     '&:hover': {
       color: theme.palette.action.hover,
       fontWeight: 700,
@@ -14,24 +23,25 @@ const useStyles = makeStyles(theme => ({
     '&:active': {
       color: props => props.active && theme.palette.action.active,
     },
-  }),
+  },
 }));
 
 export default function LinkButton(props) {
   const {
+    className,
     children,
     variant,
     color,
     onLinkButtonClick,
-    active,
+    isSelected,
     ...rest
   } = props;
   const classes = useStyles(props);
+  const combinedClassNames = clsx(classes.default, classes[className]);
 
   return (
     <Link
-      className={classes.filterButton}
-      component="button"
+      className={combinedClassNames}
       variant={variant}
       color={color}
       onClick={onLinkButtonClick}
@@ -55,5 +65,5 @@ LinkButton.prototype = {
     'error',
   ]),
   onLinkButtonClick: PropTypes.func,
-  active: PropTypes.bool,
+  isSelected: PropTypes.bool,
 };
