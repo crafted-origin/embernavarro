@@ -119,6 +119,7 @@ export async function getStaticProps({ preview = false }) {
 
   return {
     props: { preview, data, error },
+    revalidate: 1,
   };
 }
 
