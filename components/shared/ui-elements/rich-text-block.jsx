@@ -38,6 +38,7 @@ const useStyles = makeStyles(theme => ({
   clientCardDescription: {
     color: colors.grey[400],
     textAlign: 'left',
+    width: '100%',
   },
 }));
 

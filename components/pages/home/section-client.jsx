@@ -6,10 +6,8 @@ import {
   CardActions,
   CardContent,
   IconButton,
-  Typography,
   makeStyles,
 } from '@material-ui/core';
-import { StarBorder, Star } from '@material-ui/icons';
 import Image from 'next/image';
 
 import SectionLayout from '@/components/shared/layouts/section-layout';
@@ -17,7 +15,15 @@ import LinkButton from '@/components/shared/ui-elements/link-button';
 import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 
 const useStyles = makeStyles(theme => ({
-  firstImageContainer: { marginTop: '42px' },
+  firstImageContainer: {
+    marginTop: '42px',
+    [theme.breakpoints.up('md')]: {
+      marginTop: '30px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginTop: '21px',
+    },
+  },
   secondImageContainer: {
     position: 'absolute',
     opacity: '20%',
@@ -27,12 +33,19 @@ const useStyles = makeStyles(theme => ({
     height: '400px',
   },
   clientContainer: {
+    height: '376px',
     position: 'relative',
     '&:hover $firstImageContainer': {
       visibility: 'hidden',
     },
     '&:hover $secondImageContainer': {
       opacity: '100%',
+    },
+    [theme.breakpoints.up['md']]: {
+      height: '397px',
+    },
+    [theme.breakpoints.up['lg']]: {
+      height: '400px',
     },
   },
   card: {
@@ -44,7 +57,7 @@ const useStyles = makeStyles(theme => ({
     margin: '0 auto 6px',
   },
   cardContent: {
-    padding: '20px',
+    padding: '20px 20px 0 20px',
   },
   cardActions: {
     justifyContent: 'flex-end',
@@ -77,6 +90,7 @@ export default function SectionClient(props) {
         className={classes.clientContainer}
         item
         xs={12}
+        md={6}
         style={{ height: '400px' }}
       >
         <Box className={classes.firstImageContainer}>
@@ -105,7 +119,7 @@ export default function SectionClient(props) {
         </Box>
 
         <Card className={classes.card} variant="outlined">
-          <CardContent>
+          <CardContent className={classes.cardContent}>
             <RichTextBlock
               data={client.description.json}
               descriptionVariant="body1"
