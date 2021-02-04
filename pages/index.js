@@ -97,7 +97,7 @@ function IndexPage(props) {
           </div>
         </ResizeObserver>
 
-        {<SectionClient data={clientSectionData} />}
+        {clientSectionData && <SectionClient data={clientSectionData} />}
 
         {/* Imitate tsParticles for now */}
         <div

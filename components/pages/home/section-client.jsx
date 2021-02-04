@@ -17,21 +17,22 @@ import LinkButton from '@/components/shared/ui-elements/link-button';
 import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 
 const useStyles = makeStyles(theme => ({
-  firstImageContainer: { width: '610px', height: '400px' },
+  firstImageContainer: { marginTop: '42px' },
   secondImageContainer: {
-    visibility: 'hidden',
     position: 'absolute',
-    top: '42px',
+    opacity: '20%',
+    top: 0,
     left: 0,
     right: 0,
+    height: '400px',
   },
   clientContainer: {
     position: 'relative',
     '&:hover $firstImageContainer': {
-      opacity: '20%',
+      visibility: 'hidden',
     },
     '&:hover $secondImageContainer': {
-      visibility: 'visible',
+      opacity: '100%',
     },
   },
   card: {
@@ -58,14 +59,91 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SectionClient(props) {
-  console.log(props);
+  // console.log(props);
   const { data } = props;
+  const clients = data?.sectionType?.clientsCollection.items;
   const classes = useStyles();
   const [isFavorite, setIsFavorite] = useState(false);
 
   const onFavoriteClick = () => {
     setIsFavorite(isFavorite => !isFavorite);
   };
+
+  const clientCards = clients.map(client => {
+    const { title, image, hoverImage, linksCollection } = client;
+    return (
+      <Grid
+        key={title}
+        className={classes.clientContainer}
+        item
+        xs={12}
+        style={{ height: '400px' }}
+      >
+        <Box className={classes.firstImageContainer}>
+          <Image
+            src={image.image.url}
+            alt={image.image.description}
+            layout={image.layout}
+            objectFit={image.objectFit}
+            objectPosition={image.objectPosition}
+            width={image.width}
+            height={image.height}
+            quality={image.quality}
+          />
+        </Box>
+        <Box className={classes.secondImageContainer}>
+          <Image
+            src={hoverImage.image.url}
+            alt={hoverImage.image.description}
+            layout={hoverImage.layout}
+            objectFit={hoverImage.objectFit}
+            objectPosition={hoverImage.objectPosition}
+            width={hoverImage.layout !== 'fill' && hoverImage.width}
+            height={hoverImage.layout !== 'fill' && hoverImage.height}
+            quality={hoverImage.quality}
+          />
+        </Box>
+
+        <Card className={classes.card} variant="outlined">
+          <CardContent>
+            <RichTextBlock
+              data={client.description.json}
+              descriptionVariant="body1"
+              descriptionClassName="clientCardDescription"
+              isTitleWithIcon
+              onTitleWithIconClick={onFavoriteClick}
+              isFavorite={isFavorite}
+            />
+          </CardContent>
+          <CardActions className={classes.cardActions}>
+            {linksCollection.items.map(link => {
+              const { title, icon, name, url } = link;
+              return (
+                <Box key={title} className={classes.linkContainer}>
+                  {!icon ? (
+                    <LinkButton variant="h4">{name}</LinkButton>
+                  ) : (
+                    <IconButton edge="start">
+                      <Box width={icon.width} height={icon.height}>
+                        <Image
+                          src={icon.image.url}
+                          alt={icon.image.description}
+                          layout={icon.layout}
+                          width={icon.width}
+                          height={icon.height}
+                          quality={icon.quality}
+                        />
+                      </Box>
+                    </IconButton>
+                  )}
+                </Box>
+              );
+            })}
+          </CardActions>
+        </Card>
+      </Grid>
+    );
+  });
 
   return (
     <SectionLayout>
@@ -76,73 +154,7 @@ export default function SectionClient(props) {
           descriptionClassName="description1"
         />
       </Box>
-      <Grid container>
-        <Grid className={classes.clientContainer} item xs={12}>
-          <Box className={classes.firstImageContainer}>
-            <Image
-              src="/client-card.svg"
-              alt="Greenstone Wellness"
-              layout="fill"
-              objectFit="cover"
-              objectPosition="center center"
-              quality={45}
-            />
-          </Box>
-          <Box className={classes.secondImageContainer}>
-            <Image
-              src="/gsw-logo.svg"
-              alt="Greenstone Wellness"
-              layout="responsive"
-              objectPosition="center center"
-              width={610}
-              height={163}
-              quality={45}
-            />
-          </Box>
-
-          <Card className={classes.card} variant="outlined">
-            <CardContent>
-              <Box display="flex" alignItems="center">
-                <IconButton
-                  aria-label="favorite"
-                  edge="start"
-                  onClick={onFavoriteClick}
-                >
-                  {isFavorite ? <Star /> : <StarBorder />}
-                </IconButton>
-                <Typography variant="h5" component="h2">
-                  Green Stone Wellness Clinic
-                </Typography>
-              </Box>
-              <Typography variant="body1" component="p">
-                Description and blurb here it will fade when sentences are too
-                long, like this one. The default of the card is faded white and
-                will show colour on HOVER. This feature is only for Desktop, not
-                for tablet or mobile.
-              </Typography>
-            </CardContent>
-            <CardActions className={classes.cardActions}>
-              <Box className={classes.linkContainer}>
-                <LinkButton variant="h4">WEBSITE</LinkButton>
-              </Box>
-              <Box className={classes.linkContainer}>
-                <IconButton edge="start">
-                  <Box width={22} height={22}>
-                    <Image
-                      src="/facebook-icon.svg"
-                      alt="facebook"
-                      layout="responsive"
-                      width={22}
-                      height={22}
-                      quality={45}
-                    />
-                  </Box>
-                </IconButton>
-              </Box>
-            </CardActions>
-          </Card>
-        </Grid>
-      </Grid>
+      <Grid container>{clientCards}</Grid>
     </SectionLayout>
   );
 }

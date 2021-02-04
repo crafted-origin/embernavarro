@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { makeStyles, Typography } from '@material-ui/core';
+import { makeStyles, Box, Typography, IconButton } from '@material-ui/core';
+import { StarBorder, Star } from '@material-ui/icons';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import colors from '@/utility/colors';
@@ -27,25 +28,40 @@ const useStyles = makeStyles(theme => ({
   h2Type1: {
     color: colors.grey[400],
   },
+  h5: {
+    marginBottom: '5px',
+  },
   description: {
     ...theme.description,
   },
   description1: { color: colors.grey[400] },
+  clientCardDescription: {
+    color: colors.grey[400],
+    textAlign: 'left',
+  },
 }));
 
 export default function RichTextBlock(props) {
   const {
     data,
     h2ClassName,
+    h5ClassName,
     descriptionClassName,
     isSubtitle,
     descriptionVariant,
+    isTitleWithIcon,
+    onTitleWithIconClick,
+    isFavorite,
   } = props;
   const classes = useStyles();
+
   const h2ClassNames = clsx(
     classes.h2Default,
     h2ClassName && classes[h2ClassName]
   );
+
+  const h5ClassNames = clsx(classes.h5, h5ClassName && classes[h5ClassName]);
+
   const descriptionClassNames = clsx(
     classes.description,
     descriptionClassName && classes[descriptionClassName]
@@ -70,6 +86,29 @@ export default function RichTextBlock(props) {
           </Typography>
         );
       },
+      [BLOCKS.HEADING_5]: (node, children) => {
+        if (isTitleWithIcon) {
+          return (
+            <Box display="flex" alignItems="center">
+              <IconButton
+                aria-label="favorite"
+                edge="start"
+                onClick={onTitleWithIconClick}
+              >
+                {isFavorite ? <Star /> : <StarBorder />}
+              </IconButton>
+              <Typography className={h5ClassNames} variant="h5">
+                {children}
+              </Typography>
+            </Box>
+          );
+        }
+        return (
+          <Typography className={h5ClassNames} variant="h5">
+            {children}
+          </Typography>
+        );
+      },
       [BLOCKS.PARAGRAPH]: (node, children) => {
         return (
           <Typography
@@ -90,7 +129,9 @@ export default function RichTextBlock(props) {
 
 RichTextBlock.prototype = {
   data: PropTypes.object,
-  isSectionTitle: PropTypes.bool,
   isSubtitle: PropTypes.bool,
-  isDescription: PropTypes.bool,
+  h2ClassName: PropTypes.string,
+  h5ClassName: PropTypes.string,
+  descriptionClassName: PropTypes.string,
+  descriptionVariant: PropTypes.string,
 };
