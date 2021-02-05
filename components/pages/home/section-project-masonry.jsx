@@ -22,6 +22,9 @@ const deviceRowHeight = {
   mobile: [56, 120, 184],
 };
 
+// Todo: Move these to CMS
+const types = ['all', 'website', 'mobile', 'merch'];
+
 export default function SectionProjectMasonry(props) {
   const { data } = props;
   const theme = useTheme();
@@ -36,10 +39,11 @@ export default function SectionProjectMasonry(props) {
   const matchesDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
     noSsr: true,
   });
+
   const [initialTileData, setInitialTileData] = useState([]);
   const [tileData, setTileData] = useState([]);
-  const [types, setTypes] = useState(['all', 'website', 'mobile', 'merch']);
-  const [selectedType, setSelectedType] = useState('All');
+  const [selectedType, setSelectedType] = useState('all');
+
   // * Desktop matches first then mobile to cover max and min.
   const targetBlockWidth = matchesDesktop
     ? deviceColumnWidth.desktop[0]
@@ -50,7 +54,6 @@ export default function SectionProjectMasonry(props) {
   useEffect(() => {
     const gridList = data?.sectionType.gridList;
     const allTileData = gridList.gridListTilesCollection?.items;
-    // Todo: Move these to CMS
 
     setInitialTileData(allTileData);
     setTileData(allTileData);
