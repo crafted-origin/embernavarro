@@ -14,6 +14,31 @@ import LinkButton from '@/components/shared/ui-elements/link-button';
 import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 
 const useStyles = makeStyles(theme => ({
+  // !Needed to use gap with -margin(in item containers) since cover image doesn't respect grid spacing that uses padding.
+  gridContainer: {
+    gap: 16,
+    [theme.breakpoints.up('md')]: {
+      gap: 40,
+    },
+  },
+  clientItemContainer: {
+    height: '376px',
+    position: 'relative',
+    marginBottom: theme.spacing(2),
+    '&:hover $firstImageContainer': {
+      visibility: 'hidden',
+    },
+    '&:hover $secondImageContainer': {
+      opacity: '100%',
+    },
+    [theme.breakpoints.up('md')]: {
+      height: '397px',
+      margin: '-10px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      height: '400px',
+    },
+  },
   firstImageContainer: {
     marginTop: '42px',
     [theme.breakpoints.up('md')]: {
@@ -30,22 +55,6 @@ const useStyles = makeStyles(theme => ({
     left: 0,
     right: 0,
     height: '400px',
-  },
-  clientContainer: {
-    height: '376px',
-    position: 'relative',
-    '&:hover $firstImageContainer': {
-      visibility: 'hidden',
-    },
-    '&:hover $secondImageContainer': {
-      opacity: '100%',
-    },
-    [theme.breakpoints.up['md']]: {
-      height: '397px',
-    },
-    [theme.breakpoints.up['lg']]: {
-      height: '400px',
-    },
   },
   card: {
     position: 'absolute',
@@ -71,7 +80,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SectionClient(props) {
-  // console.log(props);
   const { data } = props;
   const clients = data?.sectionType?.clientsCollection.items;
   const classes = useStyles();
@@ -81,11 +89,10 @@ export default function SectionClient(props) {
     return (
       <Grid
         key={title}
-        className={classes.clientContainer}
+        className={classes.clientItemContainer}
         item
         xs={12}
         md={6}
-        style={{ height: '400px' }}
       >
         <Box className={classes.firstImageContainer}>
           <Image
@@ -99,6 +106,7 @@ export default function SectionClient(props) {
             quality={image.quality}
           />
         </Box>
+
         <Box className={classes.secondImageContainer}>
           <Image
             src={hoverImage.image.url}
@@ -154,7 +162,7 @@ export default function SectionClient(props) {
   });
 
   return (
-    <SectionLayout>
+    <SectionLayout mb={{ xs: '50px', md: '100px', lg: '200px' }}>
       <Box mb="20px">
         <RichTextBlock
           data={data.description?.json}
@@ -162,7 +170,9 @@ export default function SectionClient(props) {
           descriptionClassName="description1"
         />
       </Box>
-      <Grid container>{clientCards}</Grid>
+      <Grid container className={classes.gridContainer}>
+        {clientCards}
+      </Grid>
     </SectionLayout>
   );
 }

@@ -101,6 +101,16 @@ function IndexPage(props) {
           style={{ backgroundColor: '#FFFFFF' }}
         >
           {clientSectionData && <SectionClient data={clientSectionData} />}
+          <Image
+            src="/backgrounds/clouds-bottom.svg"
+            alt="Clouds"
+            layout="responsive"
+            // objectFit="responsive"
+            // objectPosition="bottom center"
+            width={3000}
+            height={300}
+            quality={45}
+          />
         </Box>
 
         {/* Imitate tsParticles for now */}
