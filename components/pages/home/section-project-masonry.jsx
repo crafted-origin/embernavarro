@@ -96,7 +96,7 @@ export default function SectionProjectMasonry(props) {
         </Box>
         <SRLWrapper>
           {/* Max columns for all device cases. */}
-          <XMasonry maxColumns={6} targetBlockWidth={targetBlockWidth}>
+          <XMasonry maxColumns={12} targetBlockWidth={targetBlockWidth}>
             {tileData.map(tile => {
               const {
                 tileImage: {

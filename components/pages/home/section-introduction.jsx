@@ -67,7 +67,8 @@ export default function SectionIntroduction(props) {
   };
 
   return (
-    <SectionLayout mb={{ xs: '50px', md: '50px', lg: '100px' }}>
+    // Todo: Remove pt when Appbar is added in
+    <SectionLayout mb={{ xs: '50px', md: '50px', lg: '100px' }} pt="50px">
       <Grid
         className={classes.container}
         container
