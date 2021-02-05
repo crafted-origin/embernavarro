@@ -1,7 +1,7 @@
 import { Box, useTheme } from '@material-ui/core';
 
 export default function SectionLayout(props) {
-  const { mb, children, ...rest } = props;
+  const { children, ...rest } = props;
   const theme = useTheme();
 
   return (
