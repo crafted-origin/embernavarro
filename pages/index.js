@@ -6,6 +6,7 @@ import { Box, makeStyles } from '@material-ui/core';
 import { useRef } from 'react';
 
 import particlesOptions from '../src/particles.json';
+import snowParticleOptions from '../src/snow-particles.json';
 import Layout from '@/components/shared/layouts/layout';
 import { getDataForIndex } from '@/lib/api';
 import SectionIntroduction from '@/components/pages/home/section-introduction';
@@ -15,10 +16,23 @@ import SectionClient from '@/components/pages/home/section-client';
 const useStyles = makeStyles(theme => ({
   mainTsParticles: {
     ...theme.particles,
+    height: props => props.firstWrapperHeight,
   },
   secondTsParticles: {
-    // ...theme.particles,
-    height: '1000px',
+    ...theme.particles,
+    height: '800px',
+  },
+  // Styles retrieved by the default ones applied as inline styles
+  canvas: {
+    backgroundColor: 'rgb(13, 71, 161)',
+    backgroundPosition: '50% 50%',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    position: 'absolute !important',
+    zIndex: 1,
+    top: 0,
+    left: 0,
+    pointerEvents: 'initial',
   },
 }));
 
@@ -58,7 +72,7 @@ function IndexPage(props) {
   return (
     <>
       <Layout preview={preview}>
-        {isParticleBackground ? (
+        {true ? (
           <Particles
             className={classes.mainTsParticles}
             options={particlesOptions}
@@ -101,25 +115,38 @@ function IndexPage(props) {
           style={{ backgroundColor: '#FFFFFF' }}
         >
           {clientSectionData && <SectionClient data={clientSectionData} />}
-          <Image
-            src="/backgrounds/clouds-bottom.svg"
-            alt="Clouds"
-            layout="responsive"
-            // objectFit="responsive"
-            // objectPosition="bottom center"
-            width={3000}
-            height={300}
-            quality={45}
-          />
         </Box>
 
         {/* Imitate tsParticles for now */}
-        <div
-          style={{
-            backgroundColor: '#FFFFFF',
-          }}
-          className={classes.secondTsParticles}
-        ></div>
+        {true ? (
+          <Box position="relative">
+            <Box position="absolute" height="300px" width="100%">
+              <Image
+                src="/backgrounds/clouds-bottom.svg"
+                alt="Clouds"
+                layout="responsive"
+                // objectFit="responsive"
+                // objectPosition="bottom center"
+                width={3000}
+                height={300}
+                quality={45}
+              />
+            </Box>
+            <Particles
+              className={classes.secondTsParticles}
+              canvasClassName={classes.canvas}
+              options={snowParticleOptions}
+            />
+          </Box>
+        ) : (
+          <div
+            style={{
+              backgroundColor: '#FFFFFF',
+              height: '500px',
+            }}
+            className={classes.secondTsParticles}
+          ></div>
+        )}
       </Layout>
     </>
   );

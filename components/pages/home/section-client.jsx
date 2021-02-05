@@ -162,7 +162,8 @@ export default function SectionClient(props) {
   });
 
   return (
-    <SectionLayout mb={{ xs: '50px', md: '100px', lg: '200px' }}>
+    // Todo: Change from pb back to margin and figure out why particles is underneath.
+    <SectionLayout pb={{ xs: '50px', md: '100px', lg: '200px' }}>
       <Box mb="20px">
         <RichTextBlock
           data={data.description?.json}
