@@ -15,10 +15,9 @@ import SectionClient from '@/components/pages/home/section-client';
 const useStyles = makeStyles(theme => ({
   mainTsParticles: {
     ...theme.particles,
-    height: props => props.firstWrapperHeight,
   },
   secondTsParticles: {
-    ...theme.particles,
+    // ...theme.particles,
     height: '1000px',
   },
 }));
@@ -31,6 +30,7 @@ function IndexPage(props) {
 
   // console.log(data);
 
+  const isParticleBackground = data?.pageType?.isParticleBackground;
   const getSectionData = name => {
     return data?.sectionsCollection?.items.find(
       section => section?.sectionType?.__typename === name
@@ -58,27 +58,23 @@ function IndexPage(props) {
   return (
     <>
       <Layout preview={preview}>
-        {/* <Particles
-          className={classes.mainTsParticles}
-          options={particlesOptions}
-          style={{ height: firstWrapperHeight }}
-        /> */}
-        {/* tsParticles substitute */}
-
-        {/* Imitate tsParticles for now */}
-        <div
-          style={{
-            backgroundColor: '#424242',
-            height: firstWrapperHeight,
-          }}
-          className={classes.mainTsParticles}
-        ></div>
+        {isParticleBackground ? (
+          <Particles
+            className={classes.mainTsParticles}
+            options={particlesOptions}
+          />
+        ) : (
+          <div
+            style={{
+              backgroundColor: '#424242',
+              height: firstWrapperHeight,
+            }}
+            className={classes.mainTsParticles}
+          ></div>
+        )}
 
         <ResizeObserver onResize={onResize}>
-          <Box
-            ref={firstWrapperRef}
-            mb={{ xs: '50px', md: '100px', lg: '200px' }}
-          >
+          <div ref={firstWrapperRef}>
             {introductionSectionData && (
               <SectionIntroduction data={introductionSectionData} />
             )}
@@ -97,10 +93,15 @@ function IndexPage(props) {
               height={300}
               quality={45}
             />
-          </Box>
+          </div>
         </ResizeObserver>
 
-        {clientSectionData && <SectionClient data={clientSectionData} />}
+        <Box
+          pt={{ xs: '50px', md: '100px', lg: '200px' }}
+          style={{ backgroundColor: '#FFFFFF' }}
+        >
+          {clientSectionData && <SectionClient data={clientSectionData} />}
+        </Box>
 
         {/* Imitate tsParticles for now */}
         <div
