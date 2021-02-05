@@ -72,7 +72,7 @@ function IndexPage(props) {
   return (
     <>
       <Layout preview={preview}>
-        {true ? (
+        {isParticleBackground ? (
           <Particles
             className={classes.mainTsParticles}
             options={particlesOptions}
@@ -101,8 +101,6 @@ function IndexPage(props) {
               src="/backgrounds/clouds-top.svg"
               alt="Clouds"
               layout="responsive"
-              // objectFit="responsive"
-              // objectPosition="bottom center"
               width={3000}
               height={300}
               quality={45}
@@ -118,15 +116,13 @@ function IndexPage(props) {
         </Box>
 
         {/* Imitate tsParticles for now */}
-        {true ? (
+        {isParticleBackground ? (
           <Box position="relative">
             <Box position="absolute" height="300px" width="100%">
               <Image
                 src="/backgrounds/clouds-bottom.svg"
                 alt="Clouds"
                 layout="responsive"
-                // objectFit="responsive"
-                // objectPosition="bottom center"
                 width={3000}
                 height={300}
                 quality={45}
