@@ -34,6 +34,7 @@ const theme = createMuiTheme({
   particles: {
     position: 'absolute',
     width: '100%',
+    height: '100%',
     margin: '0',
     padding: '0',
     zIndex: '-1',
