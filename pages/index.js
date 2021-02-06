@@ -1,9 +1,6 @@
-import { useState } from 'react';
 import Particles from 'react-tsparticles';
-import ResizeObserver from 'rc-resize-observer';
 import Image from 'next/image';
 import { Box, makeStyles } from '@material-ui/core';
-import { useRef } from 'react';
 
 import particlesOptions from '../src/particles.json';
 import snowParticleOptions from '../src/snow-particles.json';
@@ -14,33 +11,18 @@ import SectionProjectMasonry from '@/components/pages/home/section-project-mason
 import SectionClient from '@/components/pages/home/section-client';
 
 const useStyles = makeStyles(theme => ({
-  mainTsParticles: {
+  tsParticles: {
     ...theme.particles,
-    height: props => props.firstWrapperHeight,
   },
-  secondTsParticles: {
-    ...theme.particles,
-    height: '800px',
-  },
-  // Styles retrieved by the default ones applied as inline styles
   canvas: {
-    backgroundColor: 'rgb(13, 71, 161)',
-    backgroundPosition: '50% 50%',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    position: 'absolute !important',
-    zIndex: 1,
-    top: 0,
-    left: 0,
-    pointerEvents: 'initial',
+    //* This is to override the inline styles provided by the library.
+    position: 'static !important',
   },
 }));
 
 function IndexPage(props) {
   const { preview, data, error } = props;
-  const [firstWrapperHeight, setFirstWrapperHeight] = useState();
-  const firstWrapperRef = useRef();
-  const classes = useStyles({ ...props, firstWrapperHeight });
+  const classes = useStyles();
 
   // console.log(data);
 
@@ -55,10 +37,6 @@ function IndexPage(props) {
   const projectSectionData = getSectionData('SectionProject');
   const clientSectionData = getSectionData('SectionClient');
 
-  const onResize = resizeObserverProps => {
-    setFirstWrapperHeight(resizeObserverProps.height);
-  };
-
   if (error) {
     return (
       <span style={{ color: 'red' }}>{JSON.stringify(error, null, 4)}</span>
@@ -72,41 +50,38 @@ function IndexPage(props) {
   return (
     <>
       <Layout preview={preview}>
-        {isParticleBackground ? (
-          <Particles
-            className={classes.mainTsParticles}
-            options={particlesOptions}
-          />
-        ) : (
-          <div
-            style={{
-              backgroundColor: '#424242',
-              height: firstWrapperHeight,
-            }}
-            className={classes.mainTsParticles}
-          ></div>
-        )}
-
-        <ResizeObserver onResize={onResize}>
-          <div ref={firstWrapperRef}>
-            {introductionSectionData && (
-              <SectionIntroduction data={introductionSectionData} />
-            )}
-
-            {projectSectionData && (
-              <SectionProjectMasonry data={getSectionData('SectionProject')} />
-            )}
-
-            <Image
-              src="/backgrounds/clouds-top.svg"
-              alt="Clouds"
-              layout="responsive"
-              width={3000}
-              height={300}
-              quality={45}
+        <Box position="relative">
+          {isParticleBackground ? (
+            <Particles
+              className={classes.tsParticles}
+              canvasClassName={classes.canvas}
+              options={particlesOptions}
             />
-          </div>
-        </ResizeObserver>
+          ) : (
+            <div
+              style={{
+                backgroundColor: '#424242',
+              }}
+              className={classes.tsParticles}
+            ></div>
+          )}
+          {introductionSectionData && (
+            <SectionIntroduction data={introductionSectionData} />
+          )}
+
+          {projectSectionData && (
+            <SectionProjectMasonry data={getSectionData('SectionProject')} />
+          )}
+
+          <Image
+            src="/backgrounds/clouds-top.svg"
+            alt="Clouds"
+            layout="responsive"
+            width={3000}
+            height={300}
+            quality={45}
+          />
+        </Box>
 
         <Box
           pt={{ xs: '50px', md: '100px', lg: '200px' }}
@@ -115,34 +90,35 @@ function IndexPage(props) {
           {clientSectionData && <SectionClient data={clientSectionData} />}
         </Box>
 
-        {/* Imitate tsParticles for now */}
-        {isParticleBackground ? (
-          <Box position="relative">
-            <Box position="absolute" height="300px" width="100%">
-              <Image
-                src="/backgrounds/clouds-bottom.svg"
-                alt="Clouds"
-                layout="responsive"
-                width={3000}
-                height={300}
-                quality={45}
-              />
-            </Box>
+        <Box position="relative">
+          <Box position="absolute" height="300px" width="100%">
+            <Image
+              src="/backgrounds/clouds-bottom.svg"
+              alt="Clouds"
+              layout="responsive"
+              width={3000}
+              height={300}
+              quality={45}
+            />
+          </Box>
+          {isParticleBackground ? (
             <Particles
-              className={classes.secondTsParticles}
+              className={classes.tsParticles}
               canvasClassName={classes.canvas}
               options={snowParticleOptions}
             />
-          </Box>
-        ) : (
-          <div
-            style={{
-              backgroundColor: '#FFFFFF',
-              height: '500px',
-            }}
-            className={classes.secondTsParticles}
-          ></div>
-        )}
+          ) : (
+            <div
+              style={{
+                backgroundColor: '#0d47a1',
+                minHeight: '500px',
+              }}
+              className={classes.tsParticles}
+            ></div>
+          )}
+
+          {/* Continue content here */}
+        </Box>
       </Layout>
     </>
   );
