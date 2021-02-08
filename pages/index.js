@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import Particles from 'react-tsparticles';
 import Image from 'next/image';
-import { Box, makeStyles } from '@material-ui/core';
+import { Button, Box, makeStyles } from '@material-ui/core';
 
 import particlesOptions from '../src/particles.json';
 import snowParticleOptions from '../src/snow-particles.json';
@@ -9,6 +10,7 @@ import { getDataForIndex } from '@/lib/api';
 import SectionIntroduction from '@/components/pages/home/section-introduction';
 import SectionProjectMasonry from '@/components/pages/home/section-project-masonry';
 import SectionClient from '@/components/pages/home/section-client';
+import ContactDialog from '@/components/shared/ui-elements/contact-dialog';
 
 const useStyles = makeStyles(theme => ({
   tsParticles: {
@@ -23,6 +25,11 @@ const useStyles = makeStyles(theme => ({
 function IndexPage(props) {
   const { preview, data, error } = props;
   const classes = useStyles();
+  const [isOpenContact, setIsOpenContact] = useState(false);
+
+  const handleContactClick = toggle => {
+    setIsOpenContact(toggle);
+  };
 
   // console.log(data);
 
@@ -49,6 +56,17 @@ function IndexPage(props) {
 
   return (
     <>
+      <ContactDialog
+        handleContactClick={handleContactClick}
+        isOpenContact={isOpenContact}
+      />
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={() => handleContactClick(true)}
+      >
+        Open form dialog
+      </Button>
       <Layout preview={preview}>
         <Box position="relative">
           {isParticleBackground ? (
@@ -65,6 +83,7 @@ function IndexPage(props) {
               className={classes.tsParticles}
             ></div>
           )}
+
           {introductionSectionData && (
             <SectionIntroduction data={introductionSectionData} />
           )}
