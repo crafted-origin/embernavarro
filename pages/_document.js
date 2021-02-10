@@ -22,7 +22,6 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <div id="contact-hook" />
           <NextScript />
         </body>
       </Html>

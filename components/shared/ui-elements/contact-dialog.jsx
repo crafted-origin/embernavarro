@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { email, object, string } from 'yup';
 import {
@@ -8,9 +9,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Typography,
 } from '@material-ui/core';
-
-import ClientOnlyPortal from '@/components/shared/layouts/client-only-portal';
 
 //* Names are hashed so bots cannot freely guess them.
 const formInfo = {
@@ -25,41 +25,85 @@ const initialValues = {
   [formInfo.message.key]: formInfo.message.value,
 };
 
+const FORM_STATE = {
+  IDLE: 'IDLE',
+  ERROR: 'ERROR',
+  PENDING: 'PENDING',
+  SUCCESS: 'SUCCESS',
+};
+
 export default function ContactDialog(props) {
   const { isOpenContact, handleContactClick } = props;
+  const [message, setMessage] = useState();
 
   return (
-    <ClientOnlyPortal selector="#contact-hook">
-      <Dialog
-        open={true}
-        onClose={() => handleContactClick(false)}
-        aria-labelledby="form-dialog-title"
+    <Dialog
+      open={isOpenContact}
+      onClose={() => handleContactClick(false)}
+      aria-labelledby="form-dialog-title"
+    >
+      <Formik
+        validationSchema={object({
+          [formInfo.name.key]: string()
+            .required('Name is required.')
+            .min(2)
+            .max(100),
+          [formInfo.email.key]: string()
+            .required('Email is required.')
+            .email('Must be a valid email.'),
+          [formInfo.message.key]: string()
+            .required('Message is required.')
+            .min(10)
+            .max(100),
+        })}
+        initialValues={initialValues}
+        onSubmit={async (values, formikBag) => {
+          const { setStatus, resetForm } = formikBag;
+          setMessage('Sending your message...');
+
+          try {
+            const response = await fetch('/api/mail', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                name: values[formInfo.name.key],
+                email: values[formInfo.email.key],
+                message: values[formInfo.message.key],
+              }),
+            });
+
+            const responseData = await response.json();
+
+            if (!response.ok) {
+              throw new Error(responseData.message);
+            }
+
+            resetForm();
+            setStatus(FORM_STATE.SUCCESS);
+            setMessage(responseData.message);
+          } catch (err) {
+            console.log(err);
+
+            setStatus(FORM_STATE.ERROR);
+            setMessage(
+              err.message || 'Something went wrong, please try again.'
+            );
+          }
+        }}
       >
-        <DialogTitle id="form-dialog-title">Contact Me</DialogTitle>
-        <DialogContent>
-          <DialogContentText color="textPrimary">
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
-          <Formik
-            validationSchema={object({
-              [formInfo.name.key]: string()
-                .required('Name is required.')
-                .min(2)
-                .max(100),
-              [formInfo.email.key]: string()
-                .required('Email is required.')
-                .email('Must be a valid email.'),
-              [formInfo.message.key]: string()
-                .required('Message is required.')
-                .min(20)
-                .max(100),
-            })}
-            initialValues={initialValues}
-            onSubmit={(values, formikHelpers) => {}}
-          >
-            {({ values, errors, isSubmitting, isValidating, touched }) => (
-              <Form noValidate autoComplete="off">
+        {props => {
+          const { errors, isSubmitting, isValidating, touched, status } = props;
+
+          return (
+            <Form noValidate autoComplete="off">
+              <DialogTitle id="form-dialog-title">Contact Me</DialogTitle>
+              <DialogContent>
+                <DialogContentText color="textPrimary">
+                  To subscribe to this website, please enter your email address
+                  here. We will send updates occasionally.
+                </DialogContentText>
                 <Field
                   name={formInfo.name.key}
                   as={TextField}
@@ -100,19 +144,30 @@ export default function ContactDialog(props) {
                   }
                   helperText={<ErrorMessage name={formInfo.message.key} />}
                 />
-              </Form>
-            )}
-          </Formik>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => handleContactClick(false)} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={() => handleContactClick(false)} color="primary">
-            Subscribe
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </ClientOnlyPortal>
+                {status === FORM_STATE.SUCCESS && (
+                  <Typography color="primary">{message}</Typography>
+                )}
+                {status === FORM_STATE.ERROR && (
+                  <Typography color="error">{message}</Typography>
+                )}
+                {isSubmitting && (
+                  <Typography color="primary">{message}</Typography>
+                )}
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting || isValidating}
+                  onClick={() => handleContactClick(false)}
+                  color="primary"
+                >
+                  SEND MESSAGE
+                </Button>
+              </DialogActions>
+            </Form>
+          );
+        }}
+      </Formik>
+    </Dialog>
   );
 }

@@ -19,11 +19,14 @@ export default async (req, res) => {
           text: message,
         });
       } catch (error) {
-        return res
-          .status(error.statusCode || 500)
-          .json({ error: error.message });
+        return res.status(error.statusCode || 500).json({
+          message: 'Something went wrong, please send an email instead.',
+          error: error.message,
+        });
       }
-      return res.status(200).json({ error: '' });
+      return res
+        .status(200)
+        .json({ message: 'Message sent! I will reply back ASAP.', error: '' });
       break;
     default:
       res.setHeader('Allow', ['POST']);
