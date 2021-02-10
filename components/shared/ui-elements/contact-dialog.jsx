@@ -10,6 +10,7 @@ import {
   DialogContentText,
   DialogTitle,
   Typography,
+  makeStyles,
 } from '@material-ui/core';
 
 //* Names are hashed so bots cannot freely guess them.
@@ -23,6 +24,9 @@ const initialValues = {
   [formInfo.name.key]: formInfo.name.value,
   [formInfo.email.key]: formInfo.email.value,
   [formInfo.message.key]: formInfo.message.value,
+  //* Honeypot fields and values.
+  name: '',
+  email: '',
 };
 
 const FORM_STATE = {
@@ -32,9 +36,22 @@ const FORM_STATE = {
   SUCCESS: 'SUCCESS',
 };
 
+const useStyles = makeStyles(theme => ({
+  honey: {
+    opacity: 0,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: 0,
+    width: 0,
+    zIndex: -1,
+  },
+}));
+
 export default function ContactDialog(props) {
   const { isOpenContact, handleContactClick } = props;
   const [message, setMessage] = useState();
+  const classes = useStyles();
 
   return (
     <Dialog
@@ -55,6 +72,9 @@ export default function ContactDialog(props) {
             .required('Message is required.')
             .min(10)
             .max(100),
+          //* Honey pot name and email client validation.
+          name: string().max(0),
+          email: string().max(0),
         })}
         initialValues={initialValues}
         onSubmit={async (values, formikBag) => {
@@ -144,6 +164,19 @@ export default function ContactDialog(props) {
                   }
                   helperText={<ErrorMessage name={formInfo.message.key} />}
                 />
+                {/* //* uncomment for client side honey pot validation. */}
+                {/* <Field
+                  name="name"
+                  className={classes.honey}
+                  as={TextField}
+                  label="Name"
+                />
+                <Field
+                  name="email"
+                  className={classes.honey}
+                  as={TextField}
+                  label="Email"
+                /> */}
                 {status === FORM_STATE.SUCCESS && (
                   <Typography color="primary">{message}</Typography>
                 )}
@@ -158,7 +191,6 @@ export default function ContactDialog(props) {
                 <Button
                   type="submit"
                   disabled={isSubmitting || isValidating}
-                  onClick={() => handleContactClick(false)}
                   color="primary"
                 >
                   SEND MESSAGE
