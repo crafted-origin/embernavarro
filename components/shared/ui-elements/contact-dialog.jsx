@@ -79,6 +79,7 @@ export default function ContactDialog(props) {
         initialValues={initialValues}
         onSubmit={async (values, formikBag) => {
           const { setStatus, resetForm } = formikBag;
+          setStatus(FORM_STATE.PENDING);
           setMessage('Sending your message...');
 
           try {
@@ -183,7 +184,7 @@ export default function ContactDialog(props) {
                 {status === FORM_STATE.ERROR && (
                   <Typography color="error">{message}</Typography>
                 )}
-                {isSubmitting && (
+                {status === FORM_STATE.PENDING && (
                   <Typography color="primary">{message}</Typography>
                 )}
               </DialogContent>
