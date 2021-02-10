@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Particles from 'react-tsparticles';
 import Image from 'next/image';
-import { Button, Box, makeStyles } from '@material-ui/core';
+import { Button, Box, makeStyles, Fab } from '@material-ui/core';
+import { MailOutlined } from '@material-ui/icons';
 
 import particlesOptions from '../src/particles.json';
 import snowParticleOptions from '../src/snow-particles.json';
@@ -19,6 +20,13 @@ const useStyles = makeStyles(theme => ({
   canvas: {
     //* This is to override the inline styles provided by the library.
     position: 'static !important',
+  },
+  contactButton: {
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    margin: '0 1rem 1rem 0',
+    zIndex: 1,
   },
 }));
 
@@ -60,13 +68,14 @@ function IndexPage(props) {
         handleContactClick={handleContactClick}
         isOpenContact={isOpenContact}
       />
-      <Button
-        variant="outlined"
-        color="primary"
+      <Fab
         onClick={() => handleContactClick(true)}
+        className={classes.contactButton}
+        color="primary"
+        aria-label="contact"
       >
-        Open form dialog
-      </Button>
+        <MailOutlined />
+      </Fab>
       <Layout preview={preview}>
         <Box position="relative">
           {isParticleBackground ? (

@@ -46,6 +46,12 @@ const useStyles = makeStyles(theme => ({
     width: 0,
     zIndex: -1,
   },
+  dialogTitle: {
+    textAlign: 'center',
+  },
+  dialogContentText: {
+    textAlign: 'center',
+  },
 }));
 
 export default function ContactDialog(props) {
@@ -119,11 +125,15 @@ export default function ContactDialog(props) {
 
           return (
             <Form noValidate autoComplete="off">
-              <DialogTitle id="form-dialog-title">Contact Me</DialogTitle>
+              <DialogTitle className={classes.dialogTitle}>
+                YOUR THOUGHTS?
+              </DialogTitle>
               <DialogContent>
-                <DialogContentText color="textPrimary">
-                  To subscribe to this website, please enter your email address
-                  here. We will send updates occasionally.
+                <DialogContentText
+                  className={classes.dialogContentText}
+                  color="textPrimary"
+                >
+                  Let me know anything you think I might need to know.
                 </DialogContentText>
                 <Field
                   name={formInfo.name.key}
