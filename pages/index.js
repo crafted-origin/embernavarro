@@ -75,14 +75,15 @@ function IndexPage(props) {
             <SectionProjectMasonry data={projectSectionData} />
           )}
 
-          <Image
-            src="/backgrounds/clouds-top.svg"
-            alt="Clouds"
-            layout="responsive"
-            width={3000}
-            height={300}
-            quality={45}
-          />
+          <Box width="100%" position="relative" height={{ xs: '100px' }}>
+            <Image
+              src="/backgrounds/clouds-top.svg"
+              alt="Clouds"
+              layout="fill"
+              objectFit="cover"
+              quality={45}
+            />
+          </Box>
         </Box>
 
         <Box
@@ -93,13 +94,12 @@ function IndexPage(props) {
         </Box>
 
         <Box position="relative" minHeight={{ xs: '300px' }}>
-          <Box position="absolute" width="100%">
+          <Box width="100%" position="absolute" height={{ xs: '100px' }}>
             <Image
               src="/backgrounds/clouds-bottom.svg"
               alt="Clouds"
-              layout="responsive"
-              width={3000}
-              height={300}
+              layout="fill"
+              objectFit="cover"
               quality={45}
             />
           </Box>
