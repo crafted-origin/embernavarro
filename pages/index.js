@@ -93,8 +93,15 @@ function IndexPage(props) {
           {clientSectionData && <SectionClient data={clientSectionData} />}
         </Box>
 
-        <Box position="relative" minHeight={{ xs: '300px' }}>
-          <Box width="100%" position="absolute" height={{ xs: '100px' }}>
+        <Box
+          position="relative"
+          minHeight={{ xs: '300px', md: '480px', lg: '760px' }}
+        >
+          <Box
+            width="100%"
+            position="absolute"
+            height={{ xs: '100px', md: '133px', lg: '200px' }}
+          >
             <Image
               src="/backgrounds/clouds-bottom.svg"
               alt="Clouds"
