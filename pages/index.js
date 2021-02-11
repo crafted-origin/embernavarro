@@ -1,6 +1,6 @@
 import Particles from 'react-tsparticles';
 import Image from 'next/image';
-import { Box, makeStyles } from '@material-ui/core';
+import { Box, makeStyles, Typography } from '@material-ui/core';
 
 import particlesOptions from '../src/particles.json';
 import snowParticleOptions from '../src/snow-particles.json';
@@ -9,6 +9,7 @@ import { getDataForIndex } from '@/lib/api';
 import SectionIntroduction from '@/components/pages/home/section-introduction';
 import SectionProjectMasonry from '@/components/pages/home/section-project-masonry';
 import SectionClient from '@/components/pages/home/section-client';
+import SectionThankYou from '@/components/pages/home/section-thank-you';
 
 const useStyles = makeStyles(theme => ({
   tsParticles: {
@@ -36,6 +37,7 @@ function IndexPage(props) {
   const introductionSectionData = getSectionData('SectionIntroduction');
   const projectSectionData = getSectionData('SectionProject');
   const clientSectionData = getSectionData('SectionClient');
+  const thankYouSectionData = getSectionData('SectionThankYou');
 
   if (error) {
     return (
@@ -70,7 +72,7 @@ function IndexPage(props) {
           )}
 
           {projectSectionData && (
-            <SectionProjectMasonry data={getSectionData('SectionProject')} />
+            <SectionProjectMasonry data={projectSectionData} />
           )}
 
           <Image
@@ -90,8 +92,8 @@ function IndexPage(props) {
           {clientSectionData && <SectionClient data={clientSectionData} />}
         </Box>
 
-        <Box position="relative">
-          <Box position="absolute" height="300px" width="100%">
+        <Box position="relative" minHeight={{ xs: '300px' }}>
+          <Box position="absolute" width="100%">
             <Image
               src="/backgrounds/clouds-bottom.svg"
               alt="Clouds"
@@ -111,13 +113,30 @@ function IndexPage(props) {
             <div
               style={{
                 backgroundColor: '#0d47a1',
-                minHeight: '500px',
               }}
               className={classes.tsParticles}
             ></div>
           )}
 
-          {/* Continue content here */}
+          <Box
+            position="absolute"
+            bottom="0"
+            width="100%"
+            height={{ xs: '213px', md: '328px', lg: '521px' }}
+          >
+            <Image
+              src="/backgrounds/snow-trees.svg"
+              alt="Snow with trees"
+              layout="fill"
+              objectFit="cover"
+              objectPosition="bottom center"
+              quality={45}
+            />
+          </Box>
+
+          {thankYouSectionData && (
+            <SectionThankYou data={thankYouSectionData} />
+          )}
         </Box>
       </Layout>
     </>
