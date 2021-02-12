@@ -109,7 +109,8 @@ const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: '#556cd6',
+      main: colors.grey[400],
+      secondary: colors.white[400],
     },
     text: {
       primary: colors.grey[400],
@@ -127,6 +128,19 @@ const theme = createMuiTheme({
     },
     background: {
       default: '#fff',
+    },
+  },
+  overrides: {
+    MuiButton: {
+      root: {
+        backgroundColor: colors.white[400],
+        color: colors.blue[400],
+        fontSize: `${14 / defaultTheme.typography.fontSize}rem`,
+        fontWeight: 300,
+      },
+      outlined: {
+        padding: '8px 15px',
+      },
     },
   },
   colors,
