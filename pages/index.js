@@ -75,7 +75,11 @@ function IndexPage(props) {
             <SectionProjectMasonry data={projectSectionData} />
           )}
 
-          <Box width="100%" position="relative" height={{ xs: '100px' }}>
+          <Box
+            width="100%"
+            position="relative"
+            height={{ xs: '100px', md: '135px', lg: '300px' }}
+          >
             <Image
               src="/backgrounds/clouds-top.svg"
               alt="Clouds"
@@ -95,12 +99,12 @@ function IndexPage(props) {
 
         <Box
           position="relative"
-          minHeight={{ xs: '300px', md: '480px', lg: '760px' }}
+          minHeight={{ xs: '300px', md: '480px', lg: '830px' }}
         >
           <Box
             width="100%"
             position="absolute"
-            height={{ xs: '100px', md: '133px', lg: '200px' }}
+            height={{ xs: '100px', md: '133px', lg: '300px' }}
           >
             <Image
               src="/backgrounds/clouds-bottom.svg"
