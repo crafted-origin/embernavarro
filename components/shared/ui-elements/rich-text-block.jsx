@@ -50,6 +50,16 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'left',
     width: '100%',
   },
+  footerDescription: {
+    color: colors.grey[400],
+    fontSize: `${7 / theme.typography.fontSize}rem`,
+    [theme.breakpoints.up('md')]: {
+      fontSize: `${8 / theme.typography.fontSize}rem`,
+    },
+    [theme.breakpoints.up('lg')]: {
+      fontSize: `${10 / theme.typography.fontSize}rem`,
+    },
+  },
 }));
 
 export default function RichTextBlock(props) {
