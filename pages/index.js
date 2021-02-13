@@ -1,6 +1,6 @@
 import Particles from 'react-tsparticles';
 import Image from 'next/image';
-import { Box, makeStyles, Typography } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 
 import particlesOptions from '../src/particles.json';
 import snowParticleOptions from '../src/snow-particles.json';
@@ -10,6 +10,7 @@ import SectionIntroduction from '@/components/pages/home/section-introduction';
 import SectionProjectMasonry from '@/components/pages/home/section-project-masonry';
 import SectionClient from '@/components/pages/home/section-client';
 import SectionThankYou from '@/components/pages/home/section-thank-you';
+import Footer from '@/components/shared/layouts/footer';
 
 const useStyles = makeStyles(theme => ({
   tsParticles: {
@@ -149,6 +150,7 @@ function IndexPage(props) {
             <SectionThankYou data={thankYouSectionData} />
           )}
         </Box>
+        <Box>{data?.footer && <Footer data={data.footer} />}</Box>
       </Layout>
     </>
   );
