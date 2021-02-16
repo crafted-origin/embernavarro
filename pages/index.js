@@ -29,6 +29,7 @@ function IndexPage(props) {
   // console.log(data);
 
   const isParticleBackground = data?.pageType?.isParticleBackground;
+  const logo = data?.logo;
   const getSectionData = name => {
     return data?.sectionsCollection?.items.find(
       section => section?.sectionType?.__typename === name
@@ -68,6 +69,18 @@ function IndexPage(props) {
               className={classes.tsParticles}
             ></div>
           )}
+
+          <Box textAlign="center" paddingTop="10px">
+            <Image
+              src={logo.image.url}
+              alt={logo.image.description}
+              layout={logo.layout}
+              width={logo.width}
+              height={logo.height}
+              quality={logo.quality}
+            />
+          </Box>
+
           {introductionSectionData && (
             <SectionIntroduction data={introductionSectionData} />
           )}
