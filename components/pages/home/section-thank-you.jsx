@@ -4,9 +4,6 @@ import SectionLayout from '@/components/shared/layouts/section-layout';
 import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 
 const useStyles = makeStyles(theme => ({
-  container: {
-    // marginTop: '80px',
-  },
   containerButton: {
     textAlign: 'center',
   },
@@ -18,13 +15,7 @@ export default function SectionThankYou(props) {
 
   return (
     <SectionLayout pt={{ xs: '80px', md: '150px', lg: '290px' }}>
-      <Grid
-        className={classes.container}
-        container
-        justify="center"
-        alignContent="center"
-        spacing={1}
-      >
+      <Grid container justify="center" alignContent="center" spacing={1}>
         <Grid item xs={8} style={{ marginBottom: '20px' }}>
           <RichTextBlock data={data.description.json} />
         </Grid>
@@ -33,7 +24,7 @@ export default function SectionThankYou(props) {
         <Button
           fullWidth
           variant="outlined"
-          onClick={() => window.scroll(0, 0)}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           BACK TO TOP
         </Button>
