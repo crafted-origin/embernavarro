@@ -11,6 +11,15 @@ import SectionProjectMasonry from '@/components/pages/home/section-project-mason
 import SectionClient from '@/components/pages/home/section-client';
 import SectionThankYou from '@/components/pages/home/section-thank-you';
 import Footer from '@/components/shared/layouts/footer';
+import Head from 'next/head';
+import {
+  HOME_URL,
+  HOME_TITLE,
+  HOME_DESCRIPTION,
+  HOME_OG_IMAGE_URL,
+  HOME_OG_TITLE,
+  HOME_OG_DESCRIPTION,
+} from '@/lib/constants';
 
 const useStyles = makeStyles(theme => ({
   tsParticles: {
@@ -53,6 +62,15 @@ function IndexPage(props) {
 
   return (
     <>
+      <Head>
+        <title key="title">{HOME_TITLE}</title>
+        <meta name="description" key="description" content={HOME_DESCRIPTION} />
+        <meta key="og:title" property="og:title" content={HOME_OG_TITLE} />
+        <meta property="og:description" content={HOME_OG_DESCRIPTION} />
+        <meta property="og:image" content={HOME_OG_IMAGE_URL} />
+        <meta key="og:url" property="og:url" content={HOME_URL} />
+        <link key="canonical" rel="canonical" href={HOME_URL} />
+      </Head>
       <Layout preview={preview}>
         <Box position="relative">
           {isParticleBackground ? (
