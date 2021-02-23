@@ -1,7 +1,5 @@
 import Head from 'next/head';
 
-import { HOME_OG_IMAGE_URL } from '@/lib/constants';
-
 export default function Meta() {
   return (
     <Head>
@@ -32,8 +30,6 @@ export default function Meta() {
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
       <meta name="theme-color" content="#000" />
-      <meta name="description" content={`Ember Navarro's UI UX portfolio`} />
-      <meta property="og:image" content={HOME_OG_IMAGE_URL} />
     </Head>
   );
 }
