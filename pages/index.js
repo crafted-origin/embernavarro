@@ -68,6 +68,9 @@ function IndexPage(props) {
         <meta key="og:title" property="og:title" content={HOME_OG_TITLE} />
         <meta property="og:description" content={HOME_OG_DESCRIPTION} />
         <meta property="og:image" content={HOME_OG_IMAGE_URL} />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="2037" />
+        <meta property="og:image:height" content="1170" />
         <meta key="og:url" property="og:url" content={HOME_URL} />
         <link key="canonical" rel="canonical" href={HOME_URL} />
       </Head>
