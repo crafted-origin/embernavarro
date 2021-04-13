@@ -23,7 +23,7 @@ const deviceRowHeight = {
 };
 
 // Todo: Move these to CMS
-const types = ['all', 'website', 'mobile', 'merch'];
+const types = ['all', 'mobile', 'website', 'art', 'merch'];
 
 export default function SectionProjectMasonry(props) {
   const { data } = props;
@@ -79,6 +79,7 @@ export default function SectionProjectMasonry(props) {
       component="button"
       variant="h4"
       color="textSecondary"
+      title={type}
       isSelected={type === selectedType}
       onLinkButtonClick={() => {
         onFilterClick(type);
