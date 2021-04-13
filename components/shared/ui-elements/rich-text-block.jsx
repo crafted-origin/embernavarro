@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
       width: `${674 / theme.typography.fontSize}rem`,
     },
     [theme.breakpoints.up('lg')]: {
-      width: `${850 / theme.typography.fontSize}rem`,
+      width: `${816 / theme.typography.fontSize}rem`,
     },
   },
   description1: { color: colors.grey[400] },
