@@ -41,11 +41,16 @@ const useStyles = makeStyles(theme => ({
   },
   firstImageContainer: {
     marginTop: '42px',
+    paddingLeft: '20px',
+    paddingRight: '15px',
     [theme.breakpoints.up('md')]: {
       marginTop: '30px',
     },
     [theme.breakpoints.up('lg')]: {
       marginTop: '21px',
+    },
+    '& img': {
+      zIndex: 1,
     },
   },
   secondImageContainer: {
