@@ -135,7 +135,7 @@ export default function SectionClient(props) {
               return (
                 <Box key={title} className={classes.linkContainer}>
                   {!icon ? (
-                    <LinkButton href={url} variant="h4">
+                    <LinkButton href={url} variant="h4" title={name}>
                       {name}
                     </LinkButton>
                   ) : (

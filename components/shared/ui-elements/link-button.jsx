@@ -5,7 +5,7 @@ import colors from '@/utility/colors';
 
 const useStyles = makeStyles(theme => ({
   filterButton: {
-    textTransform: 'capitalize',
+    textTransform: 'uppercase',
     // Need more specificity to override default styles
     'button&': {
       margin: '0 22px',
@@ -24,6 +24,15 @@ const useStyles = makeStyles(theme => ({
     '&:active': {
       color: props => props.active && theme.palette.action.active,
     },
+    // Prevents layout shift when hover style is applied to links.
+    '&::before': {
+      display: 'block',
+      content: 'attr(title)',
+      fontWeight: 'bold',
+      height: '0',
+      overflow: 'hidden',
+      visibility: 'hidden',
+    },
   },
 }));
 
@@ -35,6 +44,7 @@ export default function LinkButton(props) {
     color,
     onLinkButtonClick,
     isSelected,
+    title,
     ...rest
   } = props;
   const classes = useStyles(props);
@@ -47,6 +57,7 @@ export default function LinkButton(props) {
       color={color}
       onClick={onLinkButtonClick}
       underline="none"
+      title={title}
       {...rest}
     >
       {children}

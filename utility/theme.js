@@ -83,6 +83,9 @@ const theme = createMuiTheme({
       fontFamily: "'Jost', 'Arial', sans-serif",
       fontSize: `${14 / defaultTheme.typography.fontSize}rem`,
       fontWeight: 300,
+      [defaultTheme.breakpoints.up('md')]: {
+        fontSize: `${20 / defaultTheme.typography.fontSize}rem`,
+      },
     },
     h5: {
       fontFamily: "'Jost', 'Arial', sans-serif",
