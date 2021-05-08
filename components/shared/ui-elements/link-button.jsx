@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     'button&': {
       margin: '0 22px',
       color: props =>
-        props.isSelected ? theme.palette.action.active : colors.white[400],
+        props.isSelected ? theme.palette.action.active : colors.grey[400],
     },
   },
   default: {
