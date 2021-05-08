@@ -1,9 +1,6 @@
-import Particles from 'react-tsparticles';
 import Image from 'next/image';
-import { Box, makeStyles } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
-import particlesOptions from '../src/particles.json';
-import snowParticleOptions from '../src/snow-particles.json';
 import Layout from '@/components/shared/layouts/layout';
 import { getDataForIndex } from '@/lib/api';
 import SectionIntroduction from '@/components/pages/home/section-introduction';
@@ -21,27 +18,9 @@ import {
   HOME_OG_DESCRIPTION,
 } from '@/lib/constants';
 
-const useStyles = makeStyles(theme => ({
-  tsParticles: {
-    ...theme.particles,
-  },
-  canvas: {
-    //* This is to override the inline styles provided by the library.
-    position: 'static !important',
-  },
-  introductionWrapper: {
-    background: `url("/backgrounds/introduction-bg.svg") no-repeat`,
-  },
-}));
-
 function IndexPage(props) {
   const { preview, data, error } = props;
-  const classes = useStyles();
 
-  // console.log(data);
-
-  const isParticleBackground = data?.pageType?.isParticleBackground;
-  const logo = data?.logo;
   const getSectionData = name => {
     return data?.sectionsCollection?.items.find(
       section => section?.sectionType?.__typename === name
@@ -124,20 +103,6 @@ function IndexPage(props) {
               quality={45}
             />
           </Box>
-          {isParticleBackground ? (
-            <Particles
-              className={classes.tsParticles}
-              canvasClassName={classes.canvas}
-              options={snowParticleOptions}
-            />
-          ) : (
-            <div
-              style={{
-                backgroundColor: '#0d47a1',
-              }}
-              className={classes.tsParticles}
-            ></div>
-          )}
 
           <Box
             position="absolute"
