@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
     //* This is to override the inline styles provided by the library.
     position: 'static !important',
   },
+  introductionWrapper: {
+    background: `url("/backgrounds/introduction-bg.svg") no-repeat`,
+  },
 }));
 
 function IndexPage(props) {
@@ -75,54 +78,26 @@ function IndexPage(props) {
         <link key="canonical" rel="canonical" href={HOME_URL} />
       </Head>
       <Layout preview={preview}>
-        <Box position="relative">
-          {isParticleBackground ? (
-            <Particles
-              className={classes.tsParticles}
-              canvasClassName={classes.canvas}
-              options={particlesOptions}
-            />
-          ) : (
-            <div
-              style={{
-                backgroundColor: '#424242',
-              }}
-              className={classes.tsParticles}
-            ></div>
-          )}
+        {introductionSectionData && (
+          <SectionIntroduction data={introductionSectionData} />
+        )}
 
-          <Box textAlign="center" paddingTop="10px">
-            <Image
-              src={logo.image.url}
-              alt={logo.image.description}
-              layout={logo.layout}
-              width={logo.width}
-              height={logo.height}
-              quality={logo.quality}
-            />
-          </Box>
+        {projectSectionData && (
+          <SectionProjectMasonry data={projectSectionData} />
+        )}
 
-          {introductionSectionData && (
-            <SectionIntroduction data={introductionSectionData} />
-          )}
-
-          {projectSectionData && (
-            <SectionProjectMasonry data={projectSectionData} />
-          )}
-
-          <Box
-            width="100%"
-            position="relative"
-            height={{ xs: '100px', md: '135px', lg: '300px' }}
-          >
-            <Image
-              src="/backgrounds/clouds-top.svg"
-              alt="Clouds"
-              layout="fill"
-              objectFit="cover"
-              quality={45}
-            />
-          </Box>
+        <Box
+          width="100%"
+          position="relative"
+          height={{ xs: '100px', md: '135px', lg: '300px' }}
+        >
+          <Image
+            src="/backgrounds/clouds-top.svg"
+            alt="Clouds"
+            layout="fill"
+            objectFit="cover"
+            quality={45}
+          />
         </Box>
 
         <Box

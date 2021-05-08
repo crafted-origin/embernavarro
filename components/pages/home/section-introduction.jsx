@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Box,
   Grid,
@@ -6,16 +7,37 @@ import {
   useTheme,
 } from '@material-ui/core';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
-import SectionLayout from '@/components/shared/layouts/section-layout';
 import RichTextBlock from '@/components/shared/ui-elements/rich-text-block';
 
 const useStyles = makeStyles(theme => ({
+  background: {
+    backgroundImage:
+      'url("/backgrounds/divider-top.svg"), url("/backgrounds/bg-logo.svg"), url("/backgrounds/blue-gradient.svg")',
+    backgroundSize: 'auto, auto, auto',
+    backgroundPosition: 'bottom, center',
+    backgroundRepeat: 'no-repeat, no-repeat, no-repeat',
+    height: '330px',
+    paddingTop: '55px',
+    marginBottom: '50px',
+    [theme.breakpoints.up('md')]: {
+      height: '700px',
+      paddingTop: '220px',
+      marginBottom: '50px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      height: '1270px',
+      paddingTop: '425px',
+      marginBottom: '100px',
+    },
+  },
   gridItemLogo: {
     paddingBottom: '10px',
   },
   gridItemDescription: {
     textAlign: 'center',
+    zIndex: 1,
   },
 }));
 
@@ -67,9 +89,10 @@ export default function SectionIntroduction(props) {
   };
 
   return (
-    <SectionLayout
-      mb={{ xs: '50px', md: '50px', lg: '100px' }}
-      pt={{ xs: '55px', md: '150px', lg: '200px' }}
+    <motion.div
+      animate={{ backgroundSize: ['auto, 100%', 'auto, 150%', 'auto, 100%'] }}
+      transition={{ duration: 20, repeat: Infinity }}
+      className={classes.background}
     >
       <Grid
         className={classes.container}
@@ -89,6 +112,6 @@ export default function SectionIntroduction(props) {
           />
         </Grid>
       </Grid>
-    </SectionLayout>
+    </motion.div>
   );
 }

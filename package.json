@@ -10,6 +10,7 @@
     "@material-ui/system": "^4.11.2",
     "clsx": "^1.1.1",
     "contentful": "^8.1.7",
+    "framer-motion": "^4.1.11",
     "graphql": "^15.4.0",
     "graphql-request": "^3.4.0",
     "next": "^10.0.5",
