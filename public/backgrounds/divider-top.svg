@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="3100px" height="400px" viewBox="0 0 3100 400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Divider Top - V cover v1</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="3100" height="400"></rect>
+        <polygon id="path-3" points="0 -2.86597135e-12 1550 293.562297 3100 -2.86597135e-12 3100 381 0 381"></polygon>
+        <filter x="-0.5%" y="-4.7%" width="101.0%" height="108.4%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <polygon id="path-5" points="0 36 1550 329.562297 3100 36 3100 381 0 381"></polygon>
+        <filter x="-0.5%" y="-5.2%" width="101.0%" height="109.3%" filterUnits="objectBoundingBox" id="filter-6">
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <polygon id="path-7" points="0 70 1550 363.562297 3100 70 3100 400 0 400"></polygon>
+        <filter x="-0.5%" y="-5.5%" width="101.0%" height="109.7%" filterUnits="objectBoundingBox" id="filter-8">
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Divider-Top---V-cover-v1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Rectangle"></g>
+        <g id="back---blue" mask="url(#mask-2)">
+            <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+            <use fill="#8BD8FF" fill-rule="evenodd" xlink:href="#path-3"></use>
+        </g>
+        <g id="middle---light-blue" mask="url(#mask-2)">
+            <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-5"></use>
+            <use fill="#D7F2FF" fill-rule="evenodd" xlink:href="#path-5"></use>
+        </g>
+        <g id="front---white" mask="url(#mask-2)">
+            <use fill="black" fill-opacity="1" filter="url(#filter-8)" xlink:href="#path-7"></use>
+            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-7"></use>
+        </g>
+    </g>
+</svg>
