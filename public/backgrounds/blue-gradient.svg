@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="3100px" height="1500px" viewBox="0 0 3100 1500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Rectangle</title>
+    <defs>
+        <linearGradient x1="75.7345708%" y1="36.5392832%" x2="40.6414348%" y2="64.9468484%" id="linearGradient-1">
+            <stop stop-color="#0081FF" offset="0%"></stop>
+            <stop stop-color="#0093FF" offset="25.7585831%"></stop>
+            <stop stop-color="#0083FF" offset="40.1390987%"></stop>
+            <stop stop-color="#0083FF" offset="64.5864166%"></stop>
+            <stop stop-color="#1B9AFF" offset="84.8738838%"></stop>
+            <stop stop-color="#0092F8" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="3100" height="1500"></rect>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Backround-+-Divider-Top-v-cover-v1">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
+            </mask>
+            <use id="Rectangle" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+        </g>
+    </g>
+</svg>
