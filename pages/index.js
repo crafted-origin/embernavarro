@@ -109,7 +109,6 @@ function IndexPage(props) {
             bottom="0"
             width="100%"
             height={{ xs: '213px', md: '328px', lg: '521px' }}
-            style={{ opacity: '70%' }}
           >
             <Image
               src="/backgrounds/autumn-trees.svg"
