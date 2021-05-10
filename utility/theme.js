@@ -143,6 +143,7 @@ const theme = createMuiTheme({
       },
       outlined: {
         padding: '8px 15px',
+        border: `1px solid ${colors.blue[400]} `,
       },
     },
   },
