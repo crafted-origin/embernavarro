@@ -1,5 +1,4 @@
 import Alert from '@/components/shared/ui-elements/alert';
-import Footer from '@/components/shared/layouts/footer';
 import Meta from '@/components/shared/meta';
 
 export default function Layout({ preview, children }) {
@@ -7,12 +6,11 @@ export default function Layout({ preview, children }) {
     <>
       <Meta />
       <div>
-        <main>
+        <main style={{ position: 'relative' }}>
           <Alert preview={preview} />
           {children}
         </main>
       </div>
-      {/* <Footer /> */}
     </>
   );
 }

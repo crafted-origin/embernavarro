@@ -17,7 +17,11 @@ export default function SectionThankYou(props) {
     <SectionLayout pt={{ xs: '80px', md: '150px', lg: '290px' }}>
       <Grid container justify="center" alignContent="center" spacing={1}>
         <Grid item xs={8} style={{ marginBottom: '20px' }}>
-          <RichTextBlock data={data.description.json} />
+          <RichTextBlock
+            data={data.description.json}
+            h2ClassName="thankYouH2"
+            descriptionClassName="thankYouDescription"
+          />
         </Grid>
       </Grid>
       <Box width={192} mx="auto">
