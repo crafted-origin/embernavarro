@@ -50,8 +50,14 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'left',
     width: '100%',
   },
-  footerDescription: {
+  thankYouH2: {
     color: colors.grey[400],
+  },
+  thankYouDescription: {
+    color: colors.grey[400],
+  },
+  footerDescription: {
+    color: colors.white[400],
     fontSize: `${7 / theme.typography.fontSize}rem`,
     [theme.breakpoints.up('md')]: {
       fontSize: `${8 / theme.typography.fontSize}rem`,

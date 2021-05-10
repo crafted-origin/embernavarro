@@ -7,7 +7,7 @@ export default function Layout({ preview, children }) {
     <>
       <Meta />
       <div>
-        <main>
+        <main style={{ position: 'relative' }}>
           <Alert preview={preview} />
           {children}
         </main>

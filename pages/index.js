@@ -112,8 +112,8 @@ function IndexPage(props) {
             style={{ opacity: '70%' }}
           >
             <Image
-              src="/backgrounds/snow-trees.svg"
-              alt="Snow with trees"
+              src="/backgrounds/autumn-trees.svg"
+              alt="Autumn with trees"
               layout="fill"
               objectFit="cover"
               objectPosition="bottom center"
@@ -125,7 +125,9 @@ function IndexPage(props) {
             <SectionThankYou data={thankYouSectionData} />
           )}
         </Box>
-        <Box>{data?.footer && <Footer data={data.footer} />}</Box>
+        <Box width="100%" position="absolute" bottom="0">
+          {data?.footer && <Footer data={data.footer} />}
+        </Box>
       </Layout>
     </>
   );
