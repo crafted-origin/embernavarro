@@ -68,13 +68,14 @@ function IndexPage(props) {
         <Box
           width="100%"
           position="relative"
-          height={{ xs: '100px', md: '135px', lg: '300px' }}
+          height={{ xs: '56px', md: '115px', lg: '268px' }}
         >
           <Image
-            src="/backgrounds/clouds-top.svg"
-            alt="Clouds"
+            src="/backgrounds/waves.svg"
+            alt="Wind"
             layout="fill"
             objectFit="cover"
+            objectPosition="45%"
             quality={45}
           />
         </Box>

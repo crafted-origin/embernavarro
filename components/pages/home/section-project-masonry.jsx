@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import SimpleReactLightbox, { SRLWrapper } from 'simple-react-lightbox';
 import { XMasonry, XBlock } from 'react-xmasonry';
 import Image from 'next/image';
-import { Box, useMediaQuery, useTheme } from '@material-ui/core';
+import { Box, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
 
 import SectionLayout from '@/components/shared/layouts/section-layout';
 import LinkButton from '@/components/shared/ui-elements/link-button';
@@ -25,8 +25,19 @@ const deviceRowHeight = {
 // Todo: Move these to CMS
 const types = ['all', 'mobile', 'website', 'art', 'merch'];
 
+const useStyles = makeStyles(theme => ({
+  imageContainer: {
+    cursor: 'pointer',
+    filter: 'saturate(0)',
+    '&:hover': {
+      filter: 'saturate(1)',
+    },
+  },
+}));
+
 export default function SectionProjectMasonry(props) {
   const { data } = props;
+  const classes = useStyles();
   const theme = useTheme();
   // ! Need to disable SSR to have proper matches on initial load.
   // ! https://github.com/mui-org/material-ui/pull/23806/files
@@ -156,7 +167,7 @@ export default function SectionProjectMasonry(props) {
                     // Required to show border-radius
                     overflow="hidden"
                     borderRadius={10}
-                    style={{ cursor: 'pointer' }}
+                    className={classes.imageContainer}
                   >
                     <Image
                       src={image.url}
