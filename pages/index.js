@@ -97,11 +97,10 @@ function IndexPage(props) {
             height={{ xs: '100px', md: '133px', lg: '300px' }}
           >
             <Image
-              src="/backgrounds/clouds-bottom.svg"
+              src="/backgrounds/clouds-bottom.png"
               alt="Clouds"
               layout="fill"
               objectFit="cover"
-              quality={45}
             />
           </Box>
 
