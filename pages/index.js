@@ -125,7 +125,7 @@ function IndexPage(props) {
             <SectionThankYou data={thankYouSectionData} />
           )}
         </Box>
-        <Box width="100%" position="absolute" bottom="0">
+        <Box width="100%" position="absolute" bottom="0" pb="10px">
           {data?.footer && <Footer data={data.footer} />}
         </Box>
       </Layout>
