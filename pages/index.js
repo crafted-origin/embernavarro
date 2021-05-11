@@ -1,5 +1,9 @@
+import { useState } from 'react';
 import Image from 'next/image';
-import { Box } from '@material-ui/core';
+import Head from 'next/head';
+
+import { Box, Button, makeStyles, Fab } from '@material-ui/core';
+import { MailOutlined } from '@material-ui/icons';
 
 import Layout from '@/components/shared/layouts/layout';
 import { getDataForIndex } from '@/lib/api';
@@ -8,7 +12,7 @@ import SectionProjectMasonry from '@/components/pages/home/section-project-mason
 import SectionClient from '@/components/pages/home/section-client';
 import SectionThankYou from '@/components/pages/home/section-thank-you';
 import Footer from '@/components/shared/layouts/footer';
-import Head from 'next/head';
+import ContactDialog from '@/components/shared/ui-elements/contact-dialog';
 import {
   HOME_URL,
   HOME_TITLE,
@@ -18,8 +22,24 @@ import {
   HOME_OG_DESCRIPTION,
 } from '@/lib/constants';
 
+const useStyles = makeStyles(theme => ({
+  contactButton: {
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    margin: '0 1rem 1rem 0',
+    zIndex: 1,
+  },
+}));
+
 function IndexPage(props) {
   const { preview, data, error } = props;
+  const classes = useStyles();
+  const [isOpenContact, setIsOpenContact] = useState(false);
+
+  const handleContactClick = toggle => {
+    setIsOpenContact(toggle);
+  };
 
   const getSectionData = name => {
     return data?.sectionsCollection?.items.find(
@@ -56,6 +76,18 @@ function IndexPage(props) {
         <meta key="og:url" property="og:url" content={HOME_URL} />
         <link key="canonical" rel="canonical" href={HOME_URL} />
       </Head>
+      <ContactDialog
+        handleContactClick={handleContactClick}
+        isOpenContact={isOpenContact}
+      />
+      <Fab
+        onClick={() => handleContactClick(true)}
+        className={classes.contactButton}
+        color="primary"
+        aria-label="contact"
+      >
+        <MailOutlined />
+      </Fab>
       <Layout preview={preview}>
         {introductionSectionData && (
           <SectionIntroduction data={introductionSectionData} />
