@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
     height: '376px',
     position: 'relative',
     marginBottom: theme.spacing(2),
+    borderRadius: '5px',
+    overflow: 'hidden',
+    boxShadow: `0 0 20px rgba(82, 82, 82, 0.5)`,
     '&:hover $firstImageContainer': {
       visibility: 'hidden',
     },
@@ -62,6 +65,7 @@ const useStyles = makeStyles(theme => ({
     height: '400px',
   },
   card: {
+    boxShadow: `0 2px 10px rgba(128, 128, 128, 0.5)`,
     position: 'absolute',
     bottom: 0,
     left: 0,

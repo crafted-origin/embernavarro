@@ -91,7 +91,7 @@ export default function SectionIntroduction(props) {
   return (
     <motion.div
       animate={{ backgroundSize: ['auto, 100%', 'auto, 150%', 'auto, 100%'] }}
-      transition={{ duration: 20, repeat: Infinity }}
+      transition={{ duration: 20 }}
       className={classes.background}
     >
       <Grid
