@@ -156,7 +156,14 @@ function IndexPage(props) {
             <SectionThankYou data={thankYouSectionData} />
           )}
         </Box>
-        <Box width="100%" position="absolute" bottom="0">
+        <Box
+          width="100%"
+          position={{ xs: 'block', md: 'absolute' }}
+          bottom={{ xs: 'auto', md: '-5px', lg: 0 }}
+          marginTop={{ xs: '-1px' }}
+          bgcolor={{ xs: '#558124', md: 'transparent' }}
+          pb="10px"
+        >
           {data?.footer && <Footer data={data.footer} />}
         </Box>
       </Layout>
