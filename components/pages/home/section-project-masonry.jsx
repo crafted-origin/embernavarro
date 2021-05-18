@@ -181,7 +181,7 @@ export default function SectionProjectMasonry(props) {
                 <XBlock width={calcDimensions().xBlockWidth} key={image.sys.id}>
                   <motion.div
                     whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 1.01 }}
                     variants={variants}
                     initial="enter"
                     animate="show"
