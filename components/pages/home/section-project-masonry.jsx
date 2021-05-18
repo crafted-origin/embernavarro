@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import SimpleReactLightbox, { SRLWrapper } from 'simple-react-lightbox';
 import { XMasonry, XBlock } from 'react-xmasonry';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Box, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
 
 import SectionLayout from '@/components/shared/layouts/section-layout';
@@ -157,30 +158,57 @@ export default function SectionProjectMasonry(props) {
                 return { xBlockWidth, xBlockHeight };
               };
 
+              const variants = {
+                enter: {
+                  opacity: 0,
+                  x: -50,
+                },
+                show: {
+                  opacity: 1,
+                  x: 0,
+                  transition: {
+                    opacity: {
+                      duration: 0.5,
+                    },
+                    x: {
+                      duration: 0.5,
+                    },
+                  },
+                },
+              };
+
               return (
                 <XBlock width={calcDimensions().xBlockWidth} key={image.sys.id}>
-                  <Box
-                    key={image.sys.id}
-                    height={calcDimensions().xBlockHeight}
-                    position="relative"
-                    m={{ xs: 0.5, md: 1, lg: 1 }}
-                    // Required to show border-radius
-                    overflow="hidden"
-                    borderRadius={10}
-                    className={classes.imageContainer}
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    variants={variants}
+                    initial="enter"
+                    animate="show"
                   >
-                    <Image
-                      src={image.url}
-                      alt={image.description}
-                      layout={layout || 'fill'}
-                      width={imageWidth}
-                      height={imageHeight}
-                      objectFit={objectFit || 'cover'}
-                      objectPosition={objectPosition || 'center center'}
-                      quality={quality || 45}
-                      style={{ zIndex: -1 }}
-                    />
-                  </Box>
+                    <Box
+                      key={image.sys.id}
+                      height={calcDimensions().xBlockHeight}
+                      position="relative"
+                      m={{ xs: 0.5, md: 1, lg: 1 }}
+                      // Required to show border-radius
+                      overflow="hidden"
+                      borderRadius={10}
+                      className={classes.imageContainer}
+                    >
+                      <Image
+                        src={image.url}
+                        alt={image.description}
+                        layout={layout || 'fill'}
+                        width={imageWidth}
+                        height={imageHeight}
+                        objectFit={objectFit || 'cover'}
+                        objectPosition={objectPosition || 'center center'}
+                        quality={quality || 45}
+                        style={{ zIndex: -1 }}
+                      />
+                    </Box>
+                  </motion.div>
                 </XBlock>
               );
             })}
