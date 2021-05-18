@@ -161,16 +161,16 @@ export default function SectionProjectMasonry(props) {
               const variants = {
                 enter: {
                   opacity: 0,
-                  x: -50,
+                  y: 50,
                 },
                 show: {
                   opacity: 1,
-                  x: 0,
+                  y: 0,
                   transition: {
                     opacity: {
                       duration: 0.5,
                     },
-                    x: {
+                    y: {
                       duration: 0.5,
                     },
                   },
@@ -180,8 +180,8 @@ export default function SectionProjectMasonry(props) {
               return (
                 <XBlock width={calcDimensions().xBlockWidth} key={image.sys.id}>
                   <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     variants={variants}
                     initial="enter"
                     animate="show"
