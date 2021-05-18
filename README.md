@@ -85,4 +85,4 @@ A headless CMS was the choice that improves ease of development to incorporate t
 
 Deployment using Vercel.
 
-[Staging](https://embernavarro.vercel.app/)
+[Production](https://embernavarro.com/)
