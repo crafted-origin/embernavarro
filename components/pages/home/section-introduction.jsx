@@ -18,18 +18,23 @@ const useStyles = makeStyles(theme => ({
     backgroundSize: 'auto, auto, auto',
     backgroundPosition: 'bottom, center',
     backgroundRepeat: 'no-repeat, no-repeat, no-repeat',
-    height: '330px',
-    paddingTop: '55px',
+    height: '50vh',
+    padding: '0 1rem',
     marginBottom: '50px',
     [theme.breakpoints.up('md')]: {
-      height: '700px',
-      paddingTop: '220px',
+      height: '68vh',
       marginBottom: '50px',
     },
     [theme.breakpoints.up('lg')]: {
       height: '1270px',
-      paddingTop: '425px',
       marginBottom: '100px',
+    },
+  },
+  container: {
+    position: 'relative',
+    top: '10%',
+    [theme.breakpoints.up('md')]: {
+      top: '30%',
     },
   },
   gridItemLogo: {
