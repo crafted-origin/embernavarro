@@ -148,7 +148,7 @@ export default function SectionClient(props) {
                       href={url}
                       variant="h4"
                       title={name}
-                      component="button"
+                      target="_blank"
                     >
                       {name}
                     </LinkButton>
